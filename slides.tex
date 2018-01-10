@@ -1,0 +1,125 @@
+\documentclass[10pt]{beamer}
+
+\usetheme{metropolis}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\title{Optimización y profiling de aplicaciones HPC}
+\subtitle{Usando herramientas libres}
+\date{\today}
+\author{Emilio J. Padrón González}
+ \institute{\href{mailto:emilioj@udc.gal}{\nolinkurl{emilioj@udc.gal}}
+   -- \url{http://gac.udc.es/~emilioj}\\Grupo de Arquitectura de
+   Computadores -- Universidade da Coruña}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Contenidos}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introducción}
+
+\frame{
+}
+
+\section{Optimización y profiling de aplicaciones secuenciales}
+
+\frame{
+  \frametitle{\insertsectionhead}
+
+  \begin{itemize}
+  \item Valgrind
+  \item Gproff
+  \end{itemize}
+}
+
+\subsection{Evaluación del tiempo de ejecución y deteccion de «hot spots»}
+
+\frame{
+}
+
+\subsection{Evaluación del uso de memoria}
+
+\frame{
+}
+
+\subsection{Estudio del rendimiento de la memoria caché}
+
+\frame{
+}
+
+\subsection{Estrategias para la detección de oportunidades de
+  vectorización y paralelización}
+
+\frame{
+}
+
+\section{Optimización y profiling de aplicaciones paralelas}
+
+\frame{
+  \frametitle{\insertsectionhead}
+
+  \begin{itemize}
+  \item Paraver, Extrae y Dimemás
+  \item ompP
+  \end{itemize}
+}
+
+\subsection{Memoria compartida (OpenMP)}
+
+\frame{
+}
+
+\subsubsection{Optimización del balanceo de la carga}
+
+\frame{
+}
+
+\subsubsection{Estudio y optimización de las comunicaciones}
+
+\frame{
+}
+
+\subsection{Memoria distribuida (MPI)}
+
+\frame{
+}
+
+\subsubsection{Optimización del balanceo de la carga}
+
+\frame{
+}
+
+\subsubsection{Estudio y optimización de las comunicaciones}
+
+\frame{
+}
+
+\subsection{Escenario híbrido: mem. compartida + mem. distribuida}
+
+\frame{
+}
+
+\subsubsection{Optimización del balanceo de la carga}
+
+\frame{
+}
+
+\subsubsection{Estudio y optimización de las comunicaciones}
+
+\frame{
+}
+
+\end{document}
