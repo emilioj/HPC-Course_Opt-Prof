@@ -29,6 +29,18 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
+\begin{frame}{Contenidos: Temas 1 y 2}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \setbeamertemplate{subsection in toc}[ball unnumbered]
+  \tableofcontents[sections={1-2}]
+\end{frame}
+
+\begin{frame}{Contenidos: Tema 3}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \setbeamertemplate{subsection in toc}[ball unnumbered]
+  \tableofcontents[sections={3}]
+\end{frame}
+
 \section{Introducción}
 
 \frame{
@@ -40,9 +52,15 @@
   \frametitle{\insertsectionhead}
 
   \begin{itemize}
-  \item Valgrind
-  \item Gproff
+  \item Compiladores GNU: gcc, g++, gfortran
+  \item Depuración de código (\emph{debugging}): gdb
+  \item Análisis de rendimiento (\emph{profiling}): gproff, valgrind
   \end{itemize}
+}
+
+\subsection{Optimizaciones del compilador}
+
+\frame{
 }
 
 \subsection{Evaluación del tiempo de ejecución y deteccion de «hot spots»}
@@ -56,6 +74,12 @@
 }
 
 \subsection{Estudio del rendimiento de la memoria caché}
+
+\frame{
+}
+
+
+\subsection{El modelo \emph{roofline}}
 
 \frame{
 }
