@@ -1,6 +1,8 @@
 \documentclass[10pt]{beamer}
 
 \usetheme{metropolis}
+\setbeamertemplate{itemize subitem}{--}
+\setbeamerfont{caption}{size=\footnotesize}
 \usepackage{appendixnumberbeamer}
 
 \usepackage{booktabs}
@@ -9,88 +11,309 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
 
-\usepackage{xspace}
-\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+% Figure's path
+\graphicspath{{./figs/}}
 
-\title{Optimización y profiling de aplicaciones HPC}
-\subtitle{Usando herramientas libres}
+\title{Optimization and Profiling of HPC Applications}
+\subtitle{using free software resources}
 \date{\today}
 \author{Emilio J. Padrón González}
  \institute{\href{mailto:emilioj@udc.gal}{\nolinkurl{emilioj@udc.gal}}
-   -- \url{http://gac.udc.es/~emilioj}\\Grupo de Arquitectura de
-   Computadores -- Universidade da Coruña}
+   -- \url{http://gac.udc.es/~emilioj}\\Computer Architecture Group
+   -- Universidade da Coruña}
 
 \begin{document}
 
 \maketitle
 
-\begin{frame}{Contenidos}
+\begin{frame}{Outline}
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\begin{frame}{Contenidos: Temas 1 y 2}
+\begin{frame}{Contents: Lesson 1 and 2}
   \setbeamertemplate{section in toc}[sections numbered]
   \setbeamertemplate{subsection in toc}[ball unnumbered]
   \tableofcontents[sections={1-2}]
 \end{frame}
 
-\begin{frame}{Contenidos: Tema 3}
+\begin{frame}{Contents: Lesson 3}
   \setbeamertemplate{section in toc}[sections numbered]
   \setbeamertemplate{subsection in toc}[ball unnumbered]
   \tableofcontents[sections={3}]
 \end{frame}
 
-\section{Introducción}
+
+\section{Introduction}
 
 \frame{
+  \frametitle{Forms of parallel computing}
+
+  \begin{itemize}
+  \item Bit-level parallelism
+  \item Instruction-level parallelism (ILP)
+  \item Data parallelism (DLP)
+  \item Task parallelism (TLP)
+  \end{itemize}
 }
 
-\section{Optimización y profiling de aplicaciones secuenciales}
+\frame{
+  \frametitle{A taxonomy of computer architectures}
+
+  Flynn's taxonomy (1966!)
+
+  \begin{description}
+  \item[SISD] Single Instruction stream; Single Data stream
+  \item[MISD] Multiple Instruction stream; Single Data stream
+  \item[SIMD] Single Instruction stream; Multiple Data stream
+  \item[MIMD] Multiple Instruction stream; Multiple Data stream
+  \end{description}
+
+  \begin{figure}
+    \includegraphics[width=0.25\textwidth]{SISD}~
+    \includegraphics[width=0.25\textwidth]{MISD}~
+    \includegraphics[width=0.25\textwidth]{SIMD}~
+    \includegraphics[width=0.25\textwidth]{MIMD}
+    \caption{By I, Cburnett, CC BY-SA 3.0,
+      \url{https://commons.wikimedia.org/w/index.php?curid=2233537}}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Parallel processing in Flynn's taxonomy}
+
+  \begin{block}{SISD: exploit ILP}
+    \begin{itemize}
+    \item Superscalar processors
+    \item Pipelining
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{SIMD: exploit data parallelism}
+    \begin{itemize}
+    \item Array and Vector processors
+    \item Vector extensions in general purpose CPU
+    \item GPGPU or similar approaches based on co-processors
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{MIMD: exploit task parallelism}
+    \begin{itemize}
+    \item Multicore, multiprocessor and multicomputer architectures
+    \end{itemize}
+  \end{block}
+
+}
+
+\frame{
+  \frametitle{Typical performance metrics}
+
+  \begin{itemize}
+  \item CPU
+    \begin{itemize}
+    \item MIPS
+    \item FLOPS (usually GFLOPs/sec)
+    \end{itemize}
+  \item Memory \& I/O
+    \begin{itemize}
+    \item Latency (time units)
+    \item Bandwith/Throutput (usually GBs/sec)
+    \end{itemize}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Performance characterization}
+
+  Identifying the dominant bottleneck:
+  \begin{itemize}
+  \item Compute bound (aka CPU bound)
+  \item Memory bound
+    \begin{itemize}
+    \item Cache bound
+    \end{itemize}
+  \item I/O bound
+  \end{itemize}
+
+  Obviously, in terms of velocity:
+  \begin{itemize}
+  \item[] CPU > Cache (L1 > L2 > L3) > Mem > I/O
+  \end{itemize}
+
+}
+
+% Good explanation from https://stackoverflow.com/questions/868568/what-do-the-terms-cpu-bound-and-i-o-bound-mean
+% CPU Bound means the rate at which process progresses is limited by the speed of the CPU. A task that performs calculations on a small set of numbers, for example multiplying small matrices, is likely to be CPU bound.
+
+% I/O Bound means the rate at which a process progresses is limited by the speed of the I/O subsystem. A task that processes data from disk, for example, counting the number of lines in a file is likely to be I/O bound.
+
+% Memory bound means the rate at which a process progresses is limited by the amount memory available and the speed of that memory access. A task that processes large amounts of in memory data, for example multiplying large matrices, is likely to be Memory Bound.
+
+% Cache bound means the rate at which a process progress is limited by the amount and speed of the cache available. A task that simply processes more data than fits in the cache will be cache bound.
+
+% I/O Bound would be slower than Memory Bound would be slower than Cache Bound would be slower than CPU Bound.
+
+% The solution to being I/O bound isn't necessarily to get more Memory. In some situations, the access algorithm could be designed around the I/O, Memory or Cache limitations.
+
+\frame{
+  \frametitle{The Roofline Model}
+
+  \metroset{block=fill}
+
+  \begin{block}{Basic Roofline Model}
+    Bounds Floating-point performance as a function of
+    \begin{itemize}
+    \item machine peak performance (GFLOPs/sec)
+    \item machine peak bandwidth (GBytes/sec)
+    \item arithmetic intensity (FLOPs/Byte) \hfil \alert{\small <--- core concept}
+    \end{itemize}
+  \end{block}
+
+  \begin{figure}
+    \begin{overprint}
+      \onslide<1>\centering
+      \includegraphics[width=.7\textwidth]{naive_roofline_model}
+      \onslide<2>\centering
+      \includegraphics[width=.7\textwidth]{naive_roofline_model2}
+    \end{overprint}
+    \caption{Original image by Giu.natale, CC BY-SA 4.0, modified by me
+      \url{https://commons.wikimedia.org/w/index.php?curid=49641351}}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Expanding the roofline plot}
+
+  \begin{figure}\vspace*{-0.7cm}
+    \includegraphics[width=.5\textwidth]{roofline_model_bandwith_ceilings}~
+    \includegraphics[width=.5\textwidth]{roofline_model_in-core_ceilings}
+    \includegraphics[width=.5\textwidth]{roofline_model_locality_walls}
+    \caption{By Giu.natale - Own work, CC BY-SA 4.0,
+      \url{https://commons.wikimedia.org/w/index.php?curid=49593615}
+      \url{https://commons.wikimedia.org/w/index.php?curid=49593667}
+      \url{https://commons.wikimedia.org/w/index.php?curid=49593835}
+    }
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Roofline model: an intuitive visual performance model}
+
+  \begin{itemize}
+  \item Provides performance estimation
+    \begin{itemize}
+    \item of a given compute kernel or application
+    \item on a specific platform
+    \end{itemize}
+
+    \metroset{block=fill}
+    \begin{block}{Visual and intuitive: key information at a glance}
+      \begin{itemize}
+      \item[\checkmark] Shows inherent hardware limitations
+      \item[\checkmark] Highlights potential benefit and priority of
+        optimizations
+      \end{itemize}
+    \end{block}
+  \end{itemize}
+
+  \begin{figure}
+    \includegraphics[width=.7\textwidth]{naive_roofline_model_example}
+    \caption{By Giu.natale - Own work, CC BY-SA 4.0,
+      \url{https://commons.wikimedia.org/w/index.php?curid=49641314}}
+  \end{figure}
+}
+
+\section{Optimization and Profiling of Sequential Code}
 
 \frame{
   \frametitle{\insertsectionhead}
 
+  Main tools we'll use in this course:
+  \begin{description}
+  \item[Compiling] ~\\
+    GNU Compilers: gcc, g++, gfortran
+  \item[Debugging] ~\\
+    gdb
+  \item[Profiling and performance analysis] ~\\
+    gprof, gcov, valgrind, gperftools
+  \item[Performance characterization] ~\\
+    Berkeley Lab's CS Roofline Toolkit
+  \end{description}
+}
+
+\subsection{Compiler optimizations}
+
+\frame{
+  \frametitle{\insertsubsectionhead}
+
+  In a nutshell: \hfil (each level includes the previous)
+  \begin{description}
+  \item[{\tt -O0}] [Default] No optimization. Reduces compilation time
+    and make debugging produce the expected results.
+  \item[{\tt -O/-O1}] Optimize. Tries to reduce code size and execution
+    time, avoiding optimizations that take high compilation time.
+  \item[{\tt -O2}] Optimize even more.
+  \item[{\tt -O3}] Optimize yet more.
+  \item[{\tt -Ofast}] Enables optimizations that are not valid for all
+    standard-compliant programs. It turns on {\tt -ffast-math} and the
+    Fortran-specific {\tt -fstack-arrays}, unless {\tt
+      -fmax-stack-var-size} is specified, and {\tt
+      -fno-protect-parens}.
+  \end{description}
+
+  -> {\footnotesize Check the specific options what are being
+    enable/disable at each lever for your compiler version in the doc:}
+  {\scriptsize
+    \url{http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html\#Optimize-Options}}
+  {\scriptsize \url{http://gcc.gnu.org/onlinedocs}}
+  {\tiny (ft2's highest)}
+  {\scriptsize \url{http://gcc.gnu.org/onlinedocs/7.2.0}}
+}
+
+\subsection{Evaluating execution time and detecting hot spots}
+
+\frame{
+  \frametitle{Profiling}
+
   \begin{itemize}
-  \item Compiladores GNU: gcc, g++, gfortran
-  \item Depuración de código (\emph{debugging}): gdb
-  \item Análisis de rendimiento (\emph{profiling}): gproff, valgrind
+  \item Profiling tools help you analyze your code's performance:
+    \begin{itemize}
+    \item how often each line of code executes
+    \item what lines of code are actually executed
+    \item how much computing time each section of code uses
+    \end{itemize}
   \end{itemize}
 }
 
-\subsection{Optimizaciones del compilador}
+\frame{
+  \frametitle{GPROF: the GNU Profiler}
+
+}
+
+\subsection{Evaluating memory usage}
 
 \frame{
 }
 
-\subsection{Evaluación del tiempo de ejecución y deteccion de «hot spots»}
-
-\frame{
-}
-
-\subsection{Evaluación del uso de memoria}
-
-\frame{
-}
-
-\subsection{Estudio del rendimiento de la memoria caché}
+\subsection{Evaluating cache usage and performance}
 
 \frame{
 }
 
 
-\subsection{El modelo \emph{roofline}}
+\subsection{The \emph{roofline} model}
 
 \frame{
 }
 
-\subsection{Estrategias para la detección de oportunidades de
-  vectorización y paralelización}
+\subsection{Strategies to detect vectorization and parallelization
+  opportunities}
 
 \frame{
 }
 
-\section{Optimización y profiling de aplicaciones paralelas}
+
+\section{Optimization and Profiling of Parallel Code}
 
 \frame{
   \frametitle{\insertsectionhead}
@@ -101,47 +324,47 @@
   \end{itemize}
 }
 
-\subsection{Memoria compartida (OpenMP)}
+\subsection{Shared memory (OpenMP)}
 
 \frame{
 }
 
-\subsubsection{Optimización del balanceo de la carga}
+\subsubsection{Load balancing optimization}
 
 \frame{
 }
 
-\subsubsection{Estudio y optimización de las comunicaciones}
+\subsubsection{Communication analysis and optimization}
 
 \frame{
 }
 
-\subsection{Memoria distribuida (MPI)}
+\subsection{Distributed memory (MPI)}
 
 \frame{
 }
 
-\subsubsection{Optimización del balanceo de la carga}
+\subsubsection{Load balancing optimization}
 
 \frame{
 }
 
-\subsubsection{Estudio y optimización de las comunicaciones}
+\subsubsection{Communication analysis and optimization}
 
 \frame{
 }
 
-\subsection{Escenario híbrido: mem. compartida + mem. distribuida}
+\subsection{Hybrid parallel programming: shared + distributed Mem}
 
 \frame{
 }
 
-\subsubsection{Optimización del balanceo de la carga}
+\subsubsection{Load balancing optimization}
 
 \frame{
 }
 
-\subsubsection{Estudio y optimización de las comunicaciones}
+\subsubsection{Communication analysis and optimization}
 
 \frame{
 }
