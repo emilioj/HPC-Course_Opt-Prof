@@ -244,7 +244,54 @@
 \subsection{Compiler optimizations}
 
 \frame{
-  \frametitle{\insertsubsectionhead}
+  \frametitle{Looking at the compiler}
+  How can the compiler help us to achieve efficient binaries from our
+  source codes for a specific platform?
+  \begin{itemize}
+  \item Optimization options
+
+    {\small \tt gcc [-Q] --help=optimizers}
+
+    \makebox[0pt][r]{\tiny last gcc doc ->\hspace*{0.15cm}}{\scriptsize
+      \url{http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html}}
+
+    \makebox[0pt][r]{\tiny gcc 7.2 doc ->\hspace*{0.15cm}}{\scriptsize
+      \url{http://gcc.gnu.org/onlinedocs/gcc-7.2.0/gcc/Optimize-Options.html}}\\[0.5cm]
+
+  \item Target-specific / machine-dependent options (x86)
+
+    {\tt gcc [-Q] --help=target}
+
+    \makebox[0pt][r]{\tiny last gcc doc ->\hspace*{0.15cm}}{\scriptsize
+      \url{http://gcc.gnu.org/onlinedocs/gcc/x86-Options.html}}
+
+    \makebox[0pt][r]{\tiny gcc 7.2 doc ->\hspace*{0.15cm}}{\scriptsize
+      \url{http://gcc.gnu.org/onlinedocs/gcc-7.2.0/gcc/x86-Options.html}}
+  \end{itemize}
+  }
+
+\frame{
+  \frametitle{Compiler machine-dependent options (x86)}
+
+  (a.k.a. {\it `-m'} options)
+
+  \begin{description}
+  \item[{\tt -march={\it cpu-type}}] Generate instructions for that
+    machine type\\
+    E.g. {\tt native|x86-64|haswell|\ldots}
+  \item[{\tt -mtune={\it cpu-type}}] Tune generated code for that
+    machine type
+  \item[{\tt -mavx -mavx2\ldots}] Enable the use of extended
+    instruction sets (vector instructions, mostly)
+  \end{description}
+
+  \vfill
+  -> {\footnotesize Check target specific options with:
+    {\tt gcc -Q -march=native --help=target}}
+}
+
+\frame{
+  \frametitle{Compiler optimization levels}
 
   In a nutshell: \hfil (each level includes the previous)
   \begin{description}
@@ -252,22 +299,35 @@
     and make debugging produce the expected results.
   \item[{\tt -O/-O1}] Optimize. Tries to reduce code size and execution
     time, avoiding optimizations that take high compilation time.
-  \item[{\tt -O2}] Optimize even more.
-  \item[{\tt -O3}] Optimize yet more.
-  \item[{\tt -Ofast}] Enables optimizations that are not valid for all
-    standard-compliant programs. It turns on {\tt -ffast-math} and the
-    Fortran-specific {\tt -fstack-arrays}, unless {\tt
+  \item[{\tt -O2}] Optimizes even more.
+  \item[{\tt -O3}] Optimizes yet more.
+  \item[{\tt -Ofast}] Enables {\tt -ffast-math}, optimizations that
+    are not valid for all standard-compliant programs.
+
+    Additionally, Fortran-specific {\tt -fstack-arrays}, unless {\tt
       -fmax-stack-var-size} is specified, and {\tt
       -fno-protect-parens}.
   \end{description}
 
-  -> {\footnotesize Check the specific options what are being
-    enable/disable at each lever for your compiler version in the doc:}
-  {\scriptsize
-    \url{http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html\#Optimize-Options}}
-  {\scriptsize \url{http://gcc.gnu.org/onlinedocs}}
-  {\tiny (ft2's highest)}
-  {\scriptsize \url{http://gcc.gnu.org/onlinedocs/7.2.0}}
+  -> {\footnotesize Check specific options being enable/disable at
+    each level for your compiler version with {\tt gcc -Q -O2
+      --help=optimizers} (or in the doc)}
+}
+
+\frame{
+  \frametitle{Some key optimizations at compilation time}
+
+  \begin{itemize}
+  \item Inlining
+  \item Loop optimizations
+    \begin{itemize}
+    \item Vectorization
+    \item Loop peeling
+    \item Loop unrolling
+    \end{itemize}
+  \item Interprocedural optimizations
+  \item Profile-guided optimizations
+  \end{itemize}
 }
 
 \subsection{Evaluating execution time and detecting hot spots}
