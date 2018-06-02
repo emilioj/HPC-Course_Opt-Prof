@@ -5,6 +5,11 @@
 \setbeamerfont{caption}{size=\footnotesize}
 \usepackage{appendixnumberbeamer}
 
+\usepackage{listings}
+\lstset{language=C,basicstyle=\footnotesize\ttfamily, backgroundcolor
+  = \color{gray!20}} \usepackage{caption}
+\captionsetup[lstlisting]{font={small,tt}, labelformat=empty, labelsep=none}
+
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
 
@@ -52,8 +57,8 @@
   \begin{itemize}
   \item Bit-level parallelism
   \item Instruction-level parallelism (ILP)
-  \item Data parallelism (DLP)
-  \item Task parallelism (TLP)
+  \item Data-level parallelism (DLP)
+  \item Task-level parallelism (TLP)
   \end{itemize}
 }
 
@@ -309,7 +314,7 @@
       -fno-protect-parens}.
   \end{description}
 
-  -> {\footnotesize Check specific options being enable/disable at
+  --> {\footnotesize Check specific options being enable/disable at
     each level for your compiler version with {\tt gcc -Q -O2
       --help=optimizers} (or in the doc)}
 }
@@ -327,6 +332,159 @@
     \end{itemize}
   \item Interprocedural optimizations
   \item Profile-guided optimizations
+  \end{itemize}
+}
+
+\begin{frame}[fragile]{Vectorization}
+
+  \begin{description}
+  \item[Vectorization] Form of SIMD which allows us to crunch multiple
+    values in one CPU instruction
+  \end{description}
+
+  => Especially useful to \underline{optimize loop execution} (but not
+  exclusively)
+
+  \begin{columns}
+    \column{0.45\textwidth}{
+      \begin{lstlisting}[gobble=8,caption={Sequential loop}]
+        float A[32], B[32], C[32];
+
+        for (i=0; i<32; i++)
+          C[i] = A[i] + B[i];
+          // 32 float ADD operations
+      \end{lstlisting}
+    } \
+    \column{0.55\textwidth}{
+      \begin{lstlisting}[gobble=8,caption={Vectorized pseudocode}]
+        float A[32], B[32], C[32];
+
+        for (i=0; i<32; i+=8)
+          C[i:i+7] = A[i:i+7] + B[i:i+7];
+          // vectorization factor: 8
+          // => 4 vector float ADD ops
+      \end{lstlisting}
+    }
+  \end{columns}
+\end{frame}
+
+\frame{
+  \frametitle{Vectorization: Intel SIMD extensions}
+
+  \begin{figure}
+    \includegraphics{avx_regs}
+    \caption{x86-64 Vector Registers}
+  \end{figure}
+  \begin{itemize}
+  \item AVX-512 (ZMM0--ZMM31)
+  \item AVX/AVX2 (YMM0--YMM31) \quad \alert{\small --> AVX2 in FT2's Haswell procs}
+  \item SSE (XMM0--XMM31)
+  \end{itemize}
+}
+
+\begin{frame}[fragile]{Vectorization: x86-64 vector operations}
+
+  \begin{itemize}
+  \item Intrinsic C-like functions to access vector instructions\\
+    e.g.\\[0.2cm]
+    \begin{columns}
+      \column{0.3\textwidth}{
+        {\bf AVX asm instruction}\\
+        \begin{lstlisting}[gobble=9]
+          vmovaps ymm, m256
+        \end{lstlisting}
+      } \
+      \column{0.73\textwidth}{
+        {\bf Intrinsic function}\\
+        \begin{lstlisting}[gobble=9]
+          __m256 _mm256_load_ps (float const *mem_addr)
+          #include <immintrin.h>
+        \end{lstlisting}
+      }
+    \end{columns}
+
+  \item[] \hspace*{-0.7cm} \mbox{\scriptsize \alert{(doc)} Intrinsics Guide: \url{http://software.intel.com/sites/landingpage/IntrinsicsGuide}}\\
+  \item SIMD instructions typically require:
+    \begin{itemize}
+    \item aligned data
+    \item no pointer aliasing
+    \end{itemize}
+  \end{itemize}
+
+  \pause
+
+  \begin{columns}
+    \column{0.35\textwidth}{
+      \begin{alertblock}{Writing vectorized code}
+        \begin{itemize}
+        \item hard
+        \item error-prone
+        \end{itemize}
+      \end{alertblock}
+    }
+    \column{0.01\textwidth}{
+      \mbox{-->}
+    }
+    \column{0.5\textwidth}{
+      \begin{exampleblock}{Autovectorization}
+        \structure{\checkmark} Let compiler do it for you
+      \end{exampleblock}
+    }
+  \end{columns}
+\end{frame}
+
+
+\frame{
+  \frametitle{GCC autovectorization compiler flags}
+
+  \begin{description}
+  \item[{\tt -ftree-loop-vectorize}] Enable loop vectorization
+  \item[{\tt -ftree-slp-vectorize}] Enable basic block vectorization (SLP)
+  \end{description}
+  \begin{itemize}
+  \item Both flags are enabled by default in {\tt -O3} and {\tt
+      -Ofast}, and are also enabled with {\tt -ftree-vectorize}
+  \item {\tt Ofast}'s additional (unsafe) math optims may help autovect
+  \item Do not forget {\tt -march=native}
+  \item Reports: list (not) vectorized loops + extra info
+    {\tt -fopt-info-vec}\\
+    {\tt -fopt-info-vec-missed}\\
+    {\tt -fopt-info-vec-all} {\footnotesize(detailed autovect process)}
+  % \item Additionally:
+  %   \begin{description}
+  %   \item[{\tt -fvect-cost-model=[unlimited|dynamic|cheap]}] Specifies
+  %     the cost model for vectorization
+  %     %(default O3/Ofast: {\tt dynamic})
+  %   \item[{\tt -fsimd-cost-model=[unlimited|dynamic|cheap]}] Specifies
+  %     the vectorization cost model for code marked with a simd
+  %     directive
+  %     %(default O3/Ofast: {\tt unlimited})
+  % \end{description}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{GCC autovectorization compiler directives}
+
+  GCC Vectorization
+  pragmas~\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Loop-Specific-Pragmas.html}}:
+  \begin{itemize}
+  \item {\tt \#pragma GCC ivdep}
+    \begin{itemize}
+    \item programmer asserts no loop-carried dependencies
+    \end{itemize}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Profile-guided optimizations}
+}
+
+\frame{
+  \frametitle{Some good coding practices to help compilers}
+
+  \begin{itemize}
+  \item restricted
   \end{itemize}
 }
 
