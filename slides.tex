@@ -16,6 +16,13 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
 
+\usepackage{expl3}
+\ExplSyntaxOn
+\int_zero_new:N \g__prg_map_int
+\ExplSyntaxOff
+\usepackage{tikz}
+\usetikzlibrary{tikzmark,decorations.pathreplacing,calligraphy}
+
 % Figure's path
 \graphicspath{{./figs/}}
 
@@ -71,7 +78,17 @@
   \item[SISD] Single Instruction stream; Single Data stream
   \item[MISD] Multiple Instruction stream; Single Data stream
   \item[SIMD] Single Instruction stream; Multiple Data stream
+    \only<2->{— –
+      \begin{description}
+      \item[\alert{\footnotesize (variant)} SIMT] Single Instruction; Multiple Threads
+      \end{description}
+    }
   \item[MIMD] Multiple Instruction stream; Multiple Data stream
+    \only<3>{
+      \begin{description}
+      \item[\alert{\footnotesize (typically)} SPMD] Single Program; Multiple Data
+      \end{description}
+    }
   \end{description}
 
   \begin{figure}
@@ -108,6 +125,80 @@
     \end{itemize}
   \end{block}
 
+}
+
+\frame{
+  \frametitle{The memory}
+
+  \begin{figure}
+    \begin{overprint}
+      \onslide<1>
+      \includegraphics<1>[width=\textwidth]{memhierarchy}
+      \onslide<2>
+      \includegraphics<2>[width=\textwidth]{memhierarchy_detail}
+    \end{overprint}
+    \caption{Memory levels in a computer}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Supercomputers \& HPC Systems}
+
+  \begin{description}
+  \item[Monoprocessor with SIMD capabilities] ~
+    \begin{itemize}
+    \item Exploting the parallelism exposed:
+      \begin{itemize}
+      \item ILP
+      \item SIMD: Vectorization
+      \end{itemize}
+    \item Also: Optimize memory hierarchy access
+    \end{itemize}
+
+    \pause
+
+  \item[Shared memory multiprocessors] Processors share memory space
+    \begin{itemize}
+    \item Intra-node: easier programming model
+    \item Exploting the parallelism exposed:
+      \begin{itemize}
+      \item Pthreads
+      \item OpenMP
+      \item Intel TBB
+      \end{itemize}
+    \end{itemize}
+
+    \pause
+
+  \item[Distributed memory multiprocessors] Processors have their own memory space
+    \begin{itemize}
+    \item Inter-node: (usually) harder programming
+    \item Exploting the parallelism exposed:
+      \begin{itemize}
+      \item Message passing libraries: MPI, zeroMQ
+      \item Data analytics frameworks (Big Data): Hadoop, Spark, Flink
+      \end{itemize}
+    \end{itemize}
+  \end{description}
+}
+
+\frame{
+  \frametitle{A Supercomputer: Finis Terrae II @CESGA}
+
+   \begin{figure}
+    \includegraphics[width=\textwidth]{ftii}
+    \caption{FT2 architecture}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{A Supercomputer: Finis Terrae II @CESGA}
+
+  \vspace*{-0.5cm}
+  \begin{figure}
+    \hspace*{-0.97cm}\includegraphics[width=1.18\textwidth]{ft2node}
+    \caption{FT2 thin compute node}
+  \end{figure}
 }
 
 \frame{
@@ -331,7 +422,7 @@
     \item Loop unrolling
     \end{itemize}
   \item Interprocedural optimizations
-  \item Profile-guided optimizations
+  \item Profile-guided optimizations (PGO)
   \end{itemize}
 }
 
@@ -403,11 +494,12 @@
       }
     \end{columns}
 
-  \item[] \hspace*{-0.7cm} \mbox{\scriptsize \alert{(doc)} Intrinsics Guide: \url{http://software.intel.com/sites/landingpage/IntrinsicsGuide}}\\
+  \item[] \hspace*{-0.7cm} \mbox{\scriptsize \alert{(doc)} Intrinsics Guide: \url{http://software.intel.com/sites/landingpage/IntrinsicsGuide}}\\[0.2cm]
   \item SIMD instructions typically require:
     \begin{itemize}
     \item aligned data
-    \item no pointer aliasing
+    \item no pointer aliasing\\
+      {\small (pointers are aliased if they can refer to same storage location)}
     \end{itemize}
   \end{itemize}
 
@@ -464,7 +556,7 @@
 }
 
 \frame{
-  \frametitle{GCC autovectorization compiler directives}
+  \frametitle{GCC autovectorization: compiler directives and C keywords}
 
   GCC Vectorization
   pragmas~\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Loop-Specific-Pragmas.html}}:
@@ -474,21 +566,77 @@
     \item programmer asserts no loop-carried dependencies
     \end{itemize}
   \end{itemize}
-}
 
-\frame{
-  \frametitle{Profile-guided optimizations}
-}
-
-\frame{
-  \frametitle{Some good coding practices to help compilers}
-
+  C keywords:
   \begin{itemize}
-  \item restricted
+  \item {\tt restrict}~\footnote{\url{http://en.wikipedia.org/wiki/Restrict}}
+    \begin{itemize}
+    \item used in pointer declarations to assert there's no aliasing
+    \end{itemize}
   \end{itemize}
 }
 
+\frame{
+  \frametitle{Vectorization: requirements and limitations}
+
+  \begin{itemize}
+  \item Countable loops
+  \item No backward loop-carried dependencies
+  \item No function calls
+    \begin{itemize}
+    \item Except vectorizable math functions e.g. sin, sqrt,\ldots
+    \end{itemize}
+  \item Straight-line code (only one control flow: no switch)
+  \item Loop to be vectorized must be innermost loop if nested
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Profile-guided optimization (PGO)}
+
+  \begin{description}
+  \item[{\tt -fprofile-generate}] enables \begin{itemize}
+    \item[] {\tt -fprofile-arcs}
+    \item[] {\tt -fprofile-values}
+    \item[] {\tt -fvpt}
+    \end{itemize}
+  \end{description}
+  \begin{enumerate}
+  \item A {\tt .gcno} file is generated for each object file
+    \begin{itemize}
+    \item these files are also used for {\tt gcov} coverage reports
+    \end{itemize}
+  \item Then, multiple executions record coverage data into .gcda
+    files
+  \item Finally, recompile with {\tt -fprofile-use}
+    \begin{itemize}
+    \item gathers the coverage data and infer if a branch is
+      likely/unlikely
+    \end{itemize}
+  \item[-->] Resulting binary will be better at prefetching code
+  \end{enumerate}
+  \begin{description}
+  \item[{\tt -fprofile-use}] enables \begin{itemize}
+    \item[] {\tt -fbranch-probabilities}
+    \item[] {\tt -fvpt}
+    \item[] {\tt -funroll-loops}
+    \item[] {\tt -fpeel-loops}
+    \item[] {\tt -ftracer}
+    \end{itemize}
+  \end{description}
+}
+
+
+
 \subsection{Evaluating execution time and detecting hot spots}
+
+\frame{
+  \frametitle{Profile first, optimise later}
+
+  \begin{quote}
+    Premature optimization is the root of all evil -- {Donald Knuth}
+  \end{quote}
+}
 
 \frame{
   \frametitle{Profiling}
@@ -501,12 +649,89 @@
     \item how much computing time each section of code uses
     \end{itemize}
   \end{itemize}
+
+  \begin{itemize}
+  \item 2 main approaches:
+    \begin{itemize}
+    \item Instrumenting profiler
+    \item Sampling profiler
+    \end{itemize}
+  \end{itemize}
 }
 
 \frame{
   \frametitle{GPROF: the GNU Profiler}
 
+  \begin{overprint}
+    {\bf Gprof}: performance analysis tool for Unix applications, part of
+    binutils\footnote{\url{http://www.gnu.org/software/binutils}}
+    \begin{itemize}
+    \item It uses a hybrid of instrumentation and sampling
+    \end{itemize}
+
+    How to use it:
+    \begin{enumerate}
+    \item Have profiling enabled while compiling the code
+      \uncover<2->{
+        \begin{itemize}
+        \item[-->] gcc profiling flag: {\tt -pg}
+        \end{itemize}
+      }
+    \item Execute the program code to produce the profiling data
+      \uncover<2->{
+        \begin{itemize}
+        \item[-->] {\tt gmon.out} archive is generated
+        \end{itemize}
+      }
+    \item Run the gprof tool on the profiling data file (generated in
+      the step above)
+      \uncover<2->{
+        \begin{itemize}
+        \item[{\tt \$}] {\tt gprof program\_binary [gmon.out]}
+        \end{itemize}
+      }
+    \end{enumerate}
+
+    \onslide<3>
+    \vfill
+    What GPROF provides:
+    \begin{itemize}
+    \item Flat profile
+    \item Call graph
+    \end{itemize}
+  \end{overprint}
 }
+
+\begin{frame}[fragile]{gprof and gprof2dot}
+
+  \begin{block}{gprof2dot}
+    Python script to convert output from many profilers into a dot graph
+  \end{block}
+
+  \begin{lstlisting}
+    gprof program\_binary [gmon.out] | gprof2dot.py \
+                                     | dot -Tpng -o output.png
+  \end{lstlisting}
+
+  \begin{figure}
+    \includegraphics{gprof2dot_ex}
+  \end{figure}
+
+  \begin{columns}
+    \column{.45\textwidth}{
+      \begin{exampleblock}{Requirements}
+        $\text{Python2} \geq 2.7$ or $\text{Python3} \geq 3.3$\\
+        Graphviz
+      \end{exampleblock}
+    }
+    \column{.6\textwidth}{
+      \begin{alertblock}{Source \& pip package}
+        {\footnotesize \url{http://github.com/jrfonseca/gprof2dot}}\\
+        {\footnotesize \tt \$~pip install gprof2dot}
+      \end{alertblock}
+    }
+  \end{columns}
+\end{frame}
 
 \subsection{Evaluating memory usage}
 
@@ -536,9 +761,131 @@
 \frame{
   \frametitle{\insertsectionhead}
 
+  % \begin{itemize}
+  Leveraging the BSC's HPC Performance Tools~\footnote{Barcelona
+    Supercomputing Center Performance Tools:
+    \url{http://tools.bsc.es}} to profile and optimize parallel
+  applications:
+    \begin{center}
+    \item Extrae $\Rightarrow$ Paraver $\Rightarrow$ Dimemás
+    \end{center}
+%  \item ompP
+%  \end{itemize}
+}
+
+\frame{
+  \frametitle{Extrae}
+
+  {\bf Extrae}: dynamic instrumentation package to trace programs
   \begin{itemize}
-  \item Paraver, Extrae y Dimemás
-  \item ompP
+  \item part of BSC's Performance Tools~\footnote{Barcelona Supercomputing
+      Center Performance Tools: \url{http://tools.bsc.es}}~\footnote{Extrae:
+      \url{http://github.com/bsc-performance-tools/extrae}}
+  \item generates trace files that can be later visualized with {\bf
+      Paraver}
+  \item works with different programming models:
+    \begin{itemize}
+    \item shared memory model (such as OpenMP and pthreads)
+    \item the message passing (MPI)
+    \item hybrid
+    \end{itemize}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Extrae: main features}
+
+  \begin{itemize}
+  \item Parallel programming models \tikzmark{start}
+    \begin{itemize}
+    \item MPI, OpenMP, pthreads, OmpSs, CUDA, OpenCL,\\ Java, Python\ldots
+    \end{itemize}
+  \item Platforms
+    \begin{itemize}
+    \item Intel, Cray, BlueGene, MIC, ARM, Android,\\ Fujitsu Spark\ldots
+    \end{itemize}
+  \item Performance Counters
+    \begin{itemize}
+    \item Using PAPI interface
+    \end{itemize}
+  \item Link to source code
+    \begin{itemize}
+    \item Callstack at MPI routines
+    \item OpenMP outlined routines
+    \item Selected user functions (Dyninst)
+    \end{itemize}
+  \item Periodic sampling \tikzmark{end}
+  \item User events (Extrae API)
+  \end{itemize}
+
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[decorate,decoration={calligraphic brace}]
+    ([yshift=10pt,xshift=135pt]{{pic cs:end}|-{pic cs:start}}) --
+    node[xshift=5pt,anchor=west] {\parbox{5cm}{No need to\\ recompile/link!}}
+    ([xshift=135pt]{pic cs:end})
+    ;
+  \end{tikzpicture}
+}
+
+\frame{
+  \frametitle{Extrae: how it works}
+
+  \begin{itemize}
+  \item Symbol substitution through LD\_PRELOAD \hfill \alert{\bf <-- Recommended!}
+    \begin{itemize}
+    \item Specific libraries for each combination of runtimes
+      \begin{itemize}
+      \item MPI
+      \item OpenMP
+      \item OpenMP+MPI
+      \item \ldots
+      \end{itemize}
+    \end{itemize}
+  \item Dynamic instrumentation
+    \begin{itemize}
+    \item Based on DynInst (developed by U.Wisconsin/U.Maryland)
+      \begin{itemize}
+      \item Instrumentation in memory
+      \item Binary rewriting
+      \end{itemize}
+    \end{itemize}
+  \item Alternatives
+    \begin{itemize}
+    \item Static link (i.e., PMPI, Extrae API)
+    \end{itemize}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Extrae: how to use it}
+
+  In a nutshell:
+  \begin{enumerate}
+  \item Adapt the job submission script
+  \item \structure{[optional]} Tune the Extrae XML configuration file
+    \begin{itemize}
+    \item~\mbox{Examples distributed with Extrae: {\footnotesize \tt \$EXTRAE\_HOME/share/example}}
+    \end{itemize}
+  \item Run the job to generate the trace
+  \end{enumerate}
+}
+
+\frame{
+  \frametitle{Paraver}
+
+  {\bf Paraver}: a flexible performance analysis tool
+  \begin{itemize}
+  \item part of BSC's Performance Tools~\footnote{Barcelona Supercomputing
+      Center Performance Tools: \url{http://tools.bsc.es}}~\footnote{Extrae:
+      \url{http://github.com/bsc-performance-tools/extrae}}
+  \item generates trace files that can be later visualized with {\bf
+      Paraver}
+  \item works with different programming models:
+    \begin{itemize}
+    \item shared memory model (such as OpenMP and pthreads)
+    \item the message passing (MPI)
+    \item hybrid
+    \end{itemize}
   \end{itemize}
 }
 
