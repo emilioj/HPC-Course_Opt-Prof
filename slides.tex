@@ -836,9 +836,9 @@
 
   {\bf Extrae}: dynamic instrumentation package to trace programs
   \begin{itemize}
-  \item generates trace files that can be later visualized with {\bf
+  \item Generates trace files that can be later visualized with {\bf
       Paraver}
-  \item works with different programming models:
+  \item Works with different programming models:
     \begin{itemize}
     \item shared memory model (such as OpenMP and pthreads)
     \item the message passing (MPI)
@@ -987,7 +987,7 @@
   \begin{enumerate}
   \item Submit your job!
     \begin{lstlisting}[style=shell,gobble=5]
-      $ sbatch submit_trace.sh   # FT2 submission using SLURM
+      sbatch submit_trace.sh   # FT2 submission using SLURM
     \end{lstlisting}
   \item Once finished, the trace is provided in 3 files
     \begin{lstlisting}[style=shell,gobble=5]
@@ -1003,8 +1003,56 @@
 
   {\bf Paraver}: a flexible performance analysis tool
   \begin{itemize}
-  \item core component in BSC's toolchain
+  \item Core component in BSC's toolchain
+  \item Key design concept:
+    \begin{itemize}
+    \item provide a qualitative global perception of the application
+      behavior by visual inspection
+    \item then, focus on the detailed quantitative analysis of the problems
+    \end{itemize}
+
+    \pause
+
+  \item Main features: flexible and versatile.\\
+    Two main pillars:
+    \begin{itemize}
+    \item agnostic trace format (no semantics on it)
+    \item metrics are not hardwired on the tool but programmed
+    \end{itemize}
+
+    \pause
+
+  \item Other features:
+    \begin{itemize}
+    \item detailed quantitative analysis of program performance
+    \item concurrent comparative analysis of several traces
+    \item customizable semantics of the visualized information
+    \item cooperative work, sharing views of the tracefile
+    \item building of derived metrics
+    \end{itemize}
   \end{itemize}
+}
+
+\frame{
+  \frametitle{Paraver: views}
+
+  Two main displays to provide performance information:
+  \begin{description}
+  \item[Timeline:] {\small (\emph{aka} \underline{Control Window})}
+    Represents behavior of application along time and processes
+    \begin{figure}
+      \includegraphics[width=0.7\textwidth]{paravertimeline}
+    \end{figure}
+
+    \pause
+
+  \item[Statistics:] {\small (\emph{aka} \underline{Data Window})}
+    Numerical analysis of the data
+    \begin{figure}
+      \hspace*{-0.5cm}\includegraphics[width=0.4\textwidth]{paraverhistogram}
+      \includegraphics[width=0.43\textwidth]{paraverdata}
+    \end{figure}
+  \end{description}
 }
 
 \subsection{Shared memory (OpenMP)}
