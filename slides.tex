@@ -242,6 +242,24 @@
 }
 
 \frame{
+  \frametitle{Performance metrics for parallel applications}
+
+  \begin{description}
+  \item[Speedup:] Measure of performance
+    \begin{itemize}
+    \item Ratio between sequential and parallel execution times
+      $$Speedup_{nprocs} = \frac{T_{seq}}{T_{nprocs}}$$
+    \end{itemize}
+  \item[Efficiency] Measure of use of computational resources
+    \begin{itemize}
+    \item Ratio between performance and resources used to achieve it
+      $$Efficiency_{nprocs} = \frac{Speedup_{nprocs}}{nprocs} =
+      \frac{T_{seq}}{nprocs \times T_{nprocs}}$$
+    \end{itemize}
+  \end{description}
+}
+
+\frame{
   \frametitle{Performance characterization}
 
   Identifying the dominant bottleneck:
@@ -912,6 +930,24 @@
 }
 
 \frame{
+  \frametitle{Extrae: typical scenario}
+
+  \begin{itemize}
+  \item Traces are obtained with {\bf Extrae} in a Supercomputer
+    running the code to optimize:
+    \begin{itemize}
+    \item using the {\tt LD\_PRELOAD} mechanism to intercept entries and
+      exits to MPI
+    \item data from hardware counters (cache misses, instructions and
+      cycles) at those points
+    \end{itemize}
+  \item Traces are analysed post-mortem in a PC with {\bf Paraver},
+    and maybe also with {\bf Dimemas}
+  \item Batch analysis possibility: {\bf Paramedir}
+  \end{itemize}
+}
+
+\frame{
   \frametitle{Extrae: how to use it}
 
   In a nutshell:
@@ -1038,7 +1074,7 @@
 
   Two main displays to provide performance information:
   \begin{description}
-  \item[Timeline:] {\small (\emph{aka} \underline{Control Window})}
+  \item[Timeline:]
     Represents behavior of application along time and processes
     \begin{figure}
       \includegraphics[width=0.7\textwidth]{paravertimeline}
@@ -1046,7 +1082,7 @@
 
     \pause
 
-  \item[Statistics:] {\small (\emph{aka} \underline{Data Window})}
+  \item[Statistics:] {\small (\emph{aka} \underline{Profile window})}
     Numerical analysis of the data
     \begin{figure}
       \hspace*{-0.5cm}\includegraphics[width=0.4\textwidth]{paraverhistogram}
