@@ -24,6 +24,9 @@
 \lstdefinestyle{asm}{language=[x86masm]Assembler,
   commentstyle=\itshape\color{purple!40!black},
 }
+\lstdefinestyle{valgrind}{basicstyle=\footnotesize\ttfamily,
+  backgroundcolor = {},
+}
 \usepackage{caption}
 \captionsetup[lstlisting]{font={small,tt}, labelformat=empty,
   labelsep=none}
@@ -160,6 +163,84 @@
 }
 
 \frame{
+  \frametitle{CPU \& Cache memory levels}
+
+  \begin{figure}
+    \begin{columns}
+      \column{0.4\textwidth}{
+        \includegraphics[width=0.5\textheight]{CPUCache}
+      }
+
+      \column{0.45\textwidth}{
+        \begin{table}\footnotesize
+          \caption{Memory latencies from CPU}
+          \begin{tabular}{lll}
+            \toprule
+            \parbox[t]{1.3cm}{\bf Latency\\ CPU to...}
+            & \parbox[t]{1.35cm}{\bf CPU cycles\\(approx.)}
+            & \parbox[t]{1cm}{\bf Time\\ (approx.)}\\[0.5cm]
+            Main mem & & \~{}60-80ns\\
+            QPI transit & & \~{}20ns\\
+            L3 cache & \~{}40-45 cycles & \~{}15ns\\
+            L2 cache & \~{}10 cycles & \~{}3ns\\
+            L1 cache & \~{}3-4 cycles & \~{}1ns\\
+            Register & 1 cycle\\
+            \bottomrule
+          \end{tabular}
+        \end{table}
+      }
+    \end{columns}
+    \vspace*{-0.4cm}
+    \caption{Memory hierarchy in a multi-core CPU~\footnote{2010
+        numbers. More up-to-date info:
+        \url{http://gist.github.com/eshelman/343a1c46cb3fba142c1afdcdeec17646}}\\
+      {\scriptsize By Trisha Gee, CC BY 3.0,
+        \url{http://trishagee.github.io/post/dissecting_the_disruptor_why_its_so_fast_part_two__magic_cache_line_padding}}
+    }
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Cache and cache lines}
+
+  Cache: exploiting locality
+  \begin{itemize}
+  \item temporal
+  \item spatial
+  \end{itemize}
+
+  \pause
+
+  \begin{figure}
+    \includegraphics[width=0.75\textheight]{CacheLines}
+
+    \caption{Cache line: transfer unit L1 <-> L2 <-> L3 <-> Main mem\\
+      {\scriptsize By Trisha Gee, CC BY 3.0,
+        \url{http://trishagee.github.io/post/dissecting_the_disruptor_why_its_so_fast_part_two__magic_cache_line_padding}}}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Cache behavior is \underline{key} for performance}
+
+  \begin{figure}
+    \quad
+
+    \begin{overprint}
+      \onslide<1>\centering
+      \includegraphics[width=0.65\textheight]{FalseSharing}
+      \onslide<2>\centering
+      \includegraphics[width=0.7\textheight]{FalseSharingWriteHead}
+      \onslide<3>\centering
+      \includegraphics[width=0.7\textheight]{FalseSharingReadTail}
+          \end{overprint}
+    \caption{Example of cache misbehavior: {\bf False sharing}\\
+      {\scriptsize By Trisha Gee, CC BY 3.0,
+        \url{http://trishagee.github.io/post/dissecting_the_disruptor_why_its_so_fast_part_two__magic_cache_line_padding}}}
+  \end{figure}
+}
+
+\frame{
   \frametitle{Supercomputers \& HPC Systems}
 
   \begin{description}
@@ -210,13 +291,46 @@
 }
 
 \frame{
-  \frametitle{A Supercomputer: Finis Terrae II @CESGA}
+  \frametitle{FT2's compute nodes}
 
   \vspace*{-0.5cm}
   \begin{figure}
     \hspace*{-0.97cm}\includegraphics[width=1.18\textwidth]{ft2node}
     \caption{FT2 thin compute node}
   \end{figure}
+}
+
+\frame{
+  \frametitle{Cache levels at FT2's nodes~\footnote{This and more info
+    can be obtained in runtime with {\tt sysconf} (unistd.h) or with
+    the command line utility {\tt getconf}}}
+
+  \begin{description}
+  \item[L1i]
+    \begin{itemize}
+    \item 32KB
+    \item 8-way associative
+    \item 64B/line
+    \end{itemize}
+  \item[L1d]
+    \begin{itemize}
+    \item 32KB
+    \item 8-way associative
+    \item 64B/line
+    \end{itemize}
+  \item[L2]
+    \begin{itemize}
+    \item 256KB
+    \item 4-way associative
+    \item 64B/line
+    \end{itemize}
+  \item[L3]
+    \begin{itemize}
+    \item 30MB
+    \item 12-way associative
+    \item 64B/line
+    \end{itemize}
+  \end{description}
 }
 
 \frame{
@@ -360,6 +474,19 @@
   \end{figure}
 }
 
+\frame{
+  \frametitle{The art of computer programming: some
+    \underline{keywords}}
+
+  \begin{itemize}
+  \item Compile
+  \item Link
+  \item Debug
+  \item Profile
+  \item Optimize
+  \end{itemize}
+}
+
 \section{Optimization and Profiling of Sequential Code}
 
 \frame{
@@ -452,16 +579,25 @@
 }
 
 \frame{
-  \frametitle{Some key optimizations at compilation time}
+  \frametitle{Some key optimizations at compilation~\footnote{\ldots or at
+      \emph{coding time}, some of them} time}
 
   \begin{itemize}
+  \item Use registers
   \item Inlining
+  \item Reduce and improve conditionals
   \item Loop optimizations
     \begin{itemize}
-    \item Vectorization
-    \item Loop peeling
     \item Loop unrolling
+    \item Loop peeling
+    \item Vectorization
     \end{itemize}
+  \item Memory data layout
+    \begin{itemize}
+    \item Mem alignment
+    \item Aliasing
+    \end{itemize}
+  \item Prefetching
   \item Interprocedural optimizations
   \item Profile-guided optimizations (PGO)
   \end{itemize}
@@ -637,6 +773,23 @@
 \frame{
   \frametitle{Profile-guided optimization (PGO)}
 
+  \begin{enumerate}
+  \item {\bf First compilation phase}: Instrument the application with profiling code
+    \begin{itemize}
+    \item[$\rightarrow$] application will log profiling data when running
+    \end{itemize}
+  \item {\bf Execute the instrumented binary}
+    \begin{itemize}
+    \item[$\rightarrow$] profiling files are generated for each run
+    \end{itemize}
+  \item {\bf Second compilation phase}: Rebuild the application to
+    leverage profiling data to optimize it
+  \end{enumerate}
+}
+
+\frame{
+  \frametitle{Profile-guided optimization (PGO) in gcc}
+
   \begin{description}
   \item[{\tt -fprofile-generate}] enables \begin{itemize}
     \item[] {\tt -fprofile-arcs}
@@ -709,7 +862,8 @@
     {\bf Gprof}: performance analysis tool for Unix applications, part of
     binutils\footnote{\url{http://www.gnu.org/software/binutils}}
     \begin{itemize}
-    \item It uses a hybrid of instrumentation and sampling
+    \item It uses a hybrid of (compiler assisted)
+      \emph{instrumentation} and \emph{sampling}
     \end{itemize}
 
     How to use it:
@@ -746,7 +900,7 @@
   \end{overprint}
 }
 
-\begin{frame}[fragile]{gprof and gprof2dot}
+\begin{frame}[fragile]{Gprof and gprof2dot}
 
   \begin{block}{gprof2dot}
     Python script to convert output from many profilers into a dot graph
@@ -775,6 +929,186 @@
       \end{alertblock}
     }
   \end{columns}
+\end{frame}
+
+\frame{
+  \frametitle{Gprof: caveats}
+
+  GPROF main drawbacks:
+  \begin{itemize}
+  \item Relatively high overhead (mainly caused by instrumentation)
+  \item Does not support profiling multi-threaded applications!
+    \begin{itemize}
+    \item there are some workarounds\ldots
+    \end{itemize}
+  \item Cannot profile shared libraries
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Valgrind: a swiss army knife tool~\footnote{\url{http://valgrind.org}}}
+
+  {\bf Valgrind:} instrumentation \underline{framework} for building
+  analysis tools
+  \begin{itemize}
+  \item Typical use:
+    \begin{itemize}
+    \item debugging: detect memory management and threading bugs
+    \item profiling: cache, mem, branches\ldots
+    \end{itemize}
+  \item ... but you can also use Valgrind to build your own tool!
+  \end{itemize}
+
+  \begin{block}{Valgrind is basically a virtual machine}
+  \begin{itemize}
+  \item[$\rightarrow$] just in time recompilation of x86 machine code
+    to some simpler RISC-like intermediate code: UCode
+  \item[$\rightarrow$] depending on the chosen tool, UCode is instrumented appropriately to record the data of interest
+  \end{itemize}
+  \end{block}
+}
+
+\frame{
+  \frametitle{Valgrind: tools provided}
+
+  6 tools included in current versions:
+  \begin{description}
+  \item[Memcheck:] a memory error detector
+  \item[Cachegrind:] a cache and branch-prediction profiler
+  \item[Callgrind:] a call-graph generating cache and
+    branch-prediction profiler
+  \item[Helgrind and DRD:] two different thread error detectors
+  \item[Massif:] a heap profiler
+  \end{description}
+
+  Also, 3 experimental tools:
+  \begin{itemize}
+  \item a stack/global array overrun detector: {\bf SGCheck}
+  \item another dynamic heap profiler: {\bf DHAT}
+  \item a SimPoint basic block vector generator: {\bf BBV}
+  \end{itemize}
+}
+
+\begin{frame}[fragile]{Valgrind: detecting memory-related errors with Memcheck}
+  \begin{description}
+  \item[Memcheck:] The default tool, and the most popular
+    \begin{itemize}
+    \item[\checkmark] Easy way to detect and locate memory bugs
+    \item[{\tt x}] Main drawback: it is {\bf slow!} (Valgrind, in general)
+    \item[{\tt x}] Second main drawback: some false positives!
+    \end{itemize}
+  \end{description}
+
+  \pause
+
+  How to use it?
+  \begin{itemize}
+  \item Compile your code with {\tt -g} (debugging symbols
+    $\Rightarrow$ line numbers)
+  \item Maybe a good idea to limit compiler opts: {\tt -O0 or -O1}
+  \item Launch detailed memory leak detector ({\tt --leak-check=yes}):
+    \begin{lstlisting}
+      valgrind --leak-check=yes myprog arg1 arg2
+    \end{lstlisting}
+  \item Read the (verbose) output!
+  \end{itemize}
+
+  \pause
+
+  \begin{exampleblock}{Objective}
+    Try to make your program so clean that Memcheck reports no errors
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Valgrind: Memcheck example}
+  \begin{lstlisting}[gobble=2]
+    #include <stdlib.h>
+
+    void f(void) {
+      int *x = malloc(10 * sizeof(int));
+      x[10] = 0;     // problem 1: heap block overrun
+    }                // problem 2: memory leak -- x not freed
+
+    int main(void) {
+      f();
+      return 0;
+    }
+  \end{lstlisting}
+
+  \begin{overprint}
+    \onslide<1>
+    \begin{lstlisting}[style=valgrind,gobble=6,caption={Valgrind output: Memcheck error}]
+      ==19182== Invalid write of size 4
+      ==19182==    at 0x804838F: f (example.c:6)
+      ==19182==    by 0x80483AB: main (example.c:11)
+      ==19182==  Address 0x1BA45050 is 0 bytes after a block of size 40 alloc'd
+      ==19182==    at 0x1B8FF5CD: malloc (vg_replace_malloc.c:130)
+      ==19182==    by 0x8048385: f (example.c:5)
+      ==19182==    by 0x80483AB: main (example.c:11)
+    \end{lstlisting}
+
+    \onslide<2>
+    \begin{lstlisting}[style=valgrind,gobble=6,
+      caption={Valgrind output: Memory leaks messages}]
+      ==19182== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1
+      ==19182==    at 0x1B8FF5CD: malloc (vg_replace_malloc.c:130)
+      ==19182==    by 0x8048385: f (a.c:5)
+      ==19182==    by 0x80483AB: main (a.c:11)
+    \end{lstlisting}
+
+    \onslide<3>
+    {\bf Memcheck} classifies memory leaks in 4 general types:
+    \begin{description}
+    \item[Still reachable] Not specially relevant
+    \item[Definitely lost] Symptom of problems. This is a
+      \underline{memory leak}
+    \item[Indirectly lost] Problems usually caused by a previous
+      Definitely lost issue
+    \item[Possibly lost] Inner pointers. Investigate if not on purpose
+    \end{description}
+
+    \onslide<4>
+    \begin{itemize}
+    \item {\bf Memcheck} can be used to debug and profile parallel
+      programs: \emph{pthreads}, \emph{openmp}, even \emph{MPI}!
+      \begin{itemize}
+      \item usually increases the number of false positives!
+      \end{itemize}
+    \item Very good documentation: {\small \url{http://valgrind.org/docs/manual/mc-manual.html}}
+    \end{itemize}
+  \end{overprint}
+
+\end{frame}
+
+\begin{frame}[fragile]{Valgrind: performance profiling with Callgrind}
+  \begin{description}
+  \item[Callgrind:] a profiling tool that records the function call history as a call-graph
+    \begin{itemize}
+    \item[\checkmark] Simple way of creating a CPU profile of your
+      application
+    \item[{\checkmark}] The profiling result is {\bf not} influenced by the
+      measurement.
+    \item[\checkmark] Great visualizatoin tool to help us to
+      interpretate collected data: {\bf KCachegrind}
+    \item[{\tt x}] Again: terribly slow!
+    \end{itemize}
+  \end{description}
+
+  \pause
+
+  How to use it?
+  \begin{itemize}
+  \item Compile your code with {\tt -g} (debugging symbols
+    $\Rightarrow$ line numbers)
+  \item Launch cachegrind:
+    \begin{lstlisting}
+      valgrind --tool=callgrind myprog arg1 arg2
+    \end{lstlisting}
+  \item Use KCachegrind to analyze your profiling data:
+    \begin{lstlisting}
+      kcachegrind callgrind.out.processid
+    \end{lstlisting}
+  \end{itemize}
 \end{frame}
 
 \subsection{Evaluating memory usage}
