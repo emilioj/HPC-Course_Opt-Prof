@@ -60,21 +60,20 @@
 \maketitle
 
 \begin{frame}{Outline}
+
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
+
 \end{frame}
 
 \begin{frame}{Contents: Lesson 1 and 2}
+
   \setbeamertemplate{section in toc}[sections numbered]
   \setbeamertemplate{subsection in toc}[ball unnumbered]
   \tableofcontents[sections={1-2}]
+
 \end{frame}
 
-\begin{frame}{Contents: Lesson 3}
-  \setbeamertemplate{section in toc}[sections numbered]
-  \setbeamertemplate{subsection in toc}[ball unnumbered]
-  \tableofcontents[sections={3}]
-\end{frame}
 
 
 \section{Introduction}
@@ -84,6 +83,10 @@
 \frame{
   \frametitle{What we means by: [\ldots] using \underline{Free
       Software} resources}
+
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[xshift=-2cm,yshift=-2.5cm] at (current page.north east) {\includegraphics[width=2cm]{gnu.png}};
+  \end{tikzpicture}
 
   \vfill
 
@@ -532,6 +535,63 @@
   \end{description}
 }
 
+\frame{
+  \frametitle{Complementary tools}
+
+  \setbeamertemplate{itemize subsubitem}[triangle]
+
+  \begin{itemize}
+  \item A good \emph{text editor} is essential to feel comfortable
+    coding/debugging/profiling/optimizing
+    \begin{itemize}
+    \item I like {\tt emacs} (and {\tt vim} for other purposes)
+    \end{itemize}
+
+    \pause
+
+  \item Terminal multiplexer: {\tt tmux} or {\tt screen}
+
+    \pause
+
+  \item System utilities/commands:
+    \begin{description}
+    \item[{\tt top}] (or htop\ldots)
+    \item[{\tt pstack}] ~
+    \item[{\tt ps}] and similars\ldots
+    \end{description}
+    \begin{itemize}
+    \item I particularly like {\tt top}:
+      \begin{itemize}
+      \item see load per core: {\tt 1}
+      \item toggling tasks/threads: {\tt H} ({\tt -H})
+      \item filtering: {\tt o} (eg. {\tt COMMAND=mybinary})
+      \item field management: {\tt f} (Last used CPU\ldots)
+      \end{itemize}
+    \end{itemize}
+
+    \pause
+
+  \item \includegraphics[width=2.5cm]{stackoverflow}
+    \begin{itemize}
+    \item \ldots and the rest of the Internet! (webs, chats, etc.)
+    \end{itemize}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Where are things in memory?}
+
+  Something a (good) programmer should know to write efficient code:
+  \begin{itemize}
+  \item different \emph{``types of memory''}
+  \item how variables are mapped to memory locations
+  \end{itemize}
+  \begin{figure}
+    \includegraphics[width=0.8\textwidth]{memlayout}
+    \caption{Program memory layout of Linux Executables}
+  \end{figure}
+}
+
 \subsection{Compiler optimizations}
 
 \frame{
@@ -648,6 +708,31 @@
     \endgroup
   \end{description}
 }
+
+\begin{frame}[fragile]{Other interesting compiler options}
+
+  \begin{itemize}
+  \item I like to activate all relevant \emph{warnings}: {\tt -Wall
+      -Wextra}
+  \item Use {\tt -D} to pass macros used in the code to precompiler
+
+    \pause
+
+  \item Generate ASM code \emph{``easy to read''} (eg. to check
+    vectorization)
+        \begin{lstlisting}[style=shell,gobble=5,caption={From the book
+\emph{Algorithms for programmers}\footnote<2>{Algorithm for programmers:
+\url{https://www.jjj.de/fxt/fxtbook.pdf}}\footnote<2>{Generating Mixed
+Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.com/240/generate-a-mixed-source-and-assembly-listing-using-gcc}}}}]
+         # create assembler code:
+         c++ -S -fverbose-asm -g -O2 test.cc -o test.s
+
+         # create asm interlaced with source lines:
+         as -alhnd test.s > test.lst
+       \end{lstlisting}
+  \end{itemize}
+
+\end{frame}
 
 \frame{
   \frametitle{Some key optimizations at compilation~\footnote{\ldots or at
@@ -895,7 +980,7 @@
 
 
 
-\subsection{Profiling: Evaluate execution time and detecte hot spots}
+\subsection{Profiling: Evaluate execution time and detect hot spots}
 
 \frame{
   \frametitle{Profile first, optimize later}
@@ -942,6 +1027,47 @@
     \end{itemize}
   \end{itemize}
 }
+
+\begin{frame}[fragile]{First approach: self-profiling!}
+
+  \begin{itemize}
+  \item Insert explicit \emph{timestamps} in your code
+    \begin{itemize}
+    \item DIY instrumentation
+    \item Most common approach when you're writing your own code
+      \begin{itemize}
+      \item you know the structure/flow $\Rightarrow$ where to measure
+      \end{itemize}
+    \end{itemize}
+
+    \pause
+
+  \item In C, I like the function {\tt gettimeofday()}
+    \begin{itemize}
+    \item microseconds precision
+    \end{itemize}
+
+    \begin{lstlisting}[style=c,gobble=4]
+      #include <sys/time.h>
+
+      int gettimeofday(struct timeval *tv, struct timezone *tz)
+   \end{lstlisting}
+
+    \begin{lstlisting}[style=c,gobble=4]
+      <sys/time.h>
+
+      struct timeval {
+          time_t      tv_sec;   /* seconds */
+          suseconds_t tv_usec;  /* microseconds */
+      };
+      struct timezone {
+          int tz_minuteswest;   /* minutes west of Greenwich */
+          int tz_dsttime;       /* type of DST correction */
+      };
+   \end{lstlisting}
+  \end{itemize}
+
+\end{frame}
 
 \frame{
   \frametitle{GPROF: the GNU Profiler}
@@ -992,7 +1118,8 @@
 
   \begin{block}{Flat Profile}
     \begin{itemize}
-    \item Time spent executing each function
+    \item Time spent executing each function {\small (sampled
+        $\Rightarrow$ statistical inac.)}
     \end{itemize}
   \end{block}
 
@@ -1057,6 +1184,20 @@
   \end{lstlisting}
 \end{frame}
 
+\frame{
+  \frametitle{GPROF: some useful parameters}
+
+  \begin{description}
+  \item[{\tt -s}] combine the data from several runs to minimize
+    statistical inaccuracy in measures
+  \item[{\tt -a}] suppress the printing of statically declared
+    (private) functions
+  \item[{\tt -b}] suppress verbose blurbs
+  \item[{\tt -pfunct\_name}] flat profile for a specific function
+  \item[{\tt -qfunct\_name}] call graph for a specific function
+  \end{description}
+}
+
 \begin{frame}[fragile]{Gprof and gprof2dot}
 
   \begin{block}{gprof2dot}
@@ -1096,10 +1237,14 @@
   \item Relatively high overhead (mainly caused by instrumentation)
   \item Does not support profiling multi-threaded applications!
     \begin{itemize}
-    \item there are some workarounds\ldots
+    \item there are some workarounds\ldots~\footnote{\mbox{gprof \& multithreaded code: {\scriptsize
+      \url{http://sam.zoy.org/writings/programming/gprof.html}}}
+  }~\footnote{gprof
+        \& MPI: {\scriptsize \url{http://shwina.github.io/2014/11/profiling-parallel}}}
     \end{itemize}
   \item Cannot profile shared libraries
   \item Blind to I/O
+  \item Other unexpected/weird behaviors
   \end{itemize}
 }
 
@@ -1146,7 +1291,9 @@
   \end{itemize}
 }
 
-\begin{frame}[fragile]{Valgrind: detecting memory-related errors with Memcheck}
+\begin{frame}[fragile]{Valgrind: detecting memory-related errors with
+    Memcheck}
+
   \begin{description}
   \item[Memcheck:] The default tool, and the most popular
     \begin{itemize}
@@ -1178,6 +1325,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Valgrind: Memcheck example}
+
   \begin{lstlisting}[gobble=2]
     #include <stdlib.h>
 
@@ -1283,7 +1431,8 @@
 
 \begin{frame}[fragile]{Valgrind: Callgrind typical use}
 
-  How to use it?
+  How to use it?~\footnote{Windows binary (I dit not test it):
+    \url{http://sourceforge.net/projects/qcachegrindwin}}
   \begin{itemize}
   \item Compile your code with {\tt -g} (debugging symbols
     $\Rightarrow$ line numbers)
