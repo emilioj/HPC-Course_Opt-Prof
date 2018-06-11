@@ -675,7 +675,7 @@
   \item[{\tt -Og}] Optimize debugging experience: enables
     optimizations that do not interfere with debugging
   \item[$\Rightarrow$] More fine tuning options in the doc
-    
+
     \makebox[0pt][r]{\tiny last gcc doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html}}
 
@@ -689,13 +689,13 @@
   \end{description}
 
   \pause
-  
+
   Compiling to profile (instrumentation options):
   \begin{description}
   \item[{\tt -pg}] Generate extra code to write profile information
     for {\tt gprof}
   \item[$\Rightarrow$] More fine tuning options in the doc
-    
+
     \makebox[0pt][r]{\tiny last gcc doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html}}
 
@@ -758,6 +758,61 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \item Vectorization
   \end{itemize}
 }
+
+\frame{
+  \frametitle{Profile-guided optimization (PGO)}
+
+  \begin{enumerate}
+  \item {\bf First compilation phase}: Instrument the application with profiling code
+    \begin{itemize}
+    \item[$\rightarrow$] application will log profiling data when running
+    \end{itemize}
+  \item {\bf Execute the instrumented binary}
+    \begin{itemize}
+    \item[$\rightarrow$] profiling files are generated for each run
+    \end{itemize}
+  \item {\bf Second compilation phase}: Rebuild the application to
+    leverage profiling data to optimize it
+  \end{enumerate}
+}
+
+\frame{
+  \frametitle{Profile-guided optimization (PGO) in gcc}
+
+  \begin{description}
+  \item[{\tt -fprofile-generate}] enables \begin{itemize}
+    \item[] {\tt -fprofile-arcs}
+    \item[] {\tt -fprofile-values}
+    \item[] {\tt -fvpt}
+    \end{itemize}
+  \end{description}
+  \begin{enumerate}
+  \item A {\tt .gcno} file is generated for each object file
+    \begin{itemize}
+    \item these files are also used for {\tt gcov} coverage reports
+    \end{itemize}
+  \item Then, multiple executions record coverage data into .gcda
+    files
+  \item Finally, recompile with {\tt -fprofile-use}
+    \begin{itemize}
+    \item gathers the coverage data and infer if a branch is
+      likely/unlikely
+    \end{itemize}
+  \item[$\rightarrow$] Resulting binary will be better at prefetching code
+  \end{enumerate}
+  \begin{description}
+  \item[{\tt -fprofile-use}] enables \begin{itemize}
+    \item[] {\tt -fbranch-probabilities}
+    \item[] {\tt -fvpt}
+    \item[] {\tt -funroll-loops}
+    \item[] {\tt -fpeel-loops}
+    \item[] {\tt -ftracer}
+    \end{itemize}
+  \end{description}
+}
+
+
+\subsection{Vectorization}
 
 \begin{frame}[fragile]{Vectorization}
 
@@ -926,57 +981,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{itemize}
 }
 
-\frame{
-  \frametitle{Profile-guided optimization (PGO)}
 
-  \begin{enumerate}
-  \item {\bf First compilation phase}: Instrument the application with profiling code
-    \begin{itemize}
-    \item[$\rightarrow$] application will log profiling data when running
-    \end{itemize}
-  \item {\bf Execute the instrumented binary}
-    \begin{itemize}
-    \item[$\rightarrow$] profiling files are generated for each run
-    \end{itemize}
-  \item {\bf Second compilation phase}: Rebuild the application to
-    leverage profiling data to optimize it
-  \end{enumerate}
-}
-
-\frame{
-  \frametitle{Profile-guided optimization (PGO) in gcc}
-
-  \begin{description}
-  \item[{\tt -fprofile-generate}] enables \begin{itemize}
-    \item[] {\tt -fprofile-arcs}
-    \item[] {\tt -fprofile-values}
-    \item[] {\tt -fvpt}
-    \end{itemize}
-  \end{description}
-  \begin{enumerate}
-  \item A {\tt .gcno} file is generated for each object file
-    \begin{itemize}
-    \item these files are also used for {\tt gcov} coverage reports
-    \end{itemize}
-  \item Then, multiple executions record coverage data into .gcda
-    files
-  \item Finally, recompile with {\tt -fprofile-use}
-    \begin{itemize}
-    \item gathers the coverage data and infer if a branch is
-      likely/unlikely
-    \end{itemize}
-  \item[$\rightarrow$] Resulting binary will be better at prefetching code
-  \end{enumerate}
-  \begin{description}
-  \item[{\tt -fprofile-use}] enables \begin{itemize}
-    \item[] {\tt -fbranch-probabilities}
-    \item[] {\tt -fvpt}
-    \item[] {\tt -funroll-loops}
-    \item[] {\tt -fpeel-loops}
-    \item[] {\tt -ftracer}
-    \end{itemize}
-  \end{description}
-}
 
 
 
