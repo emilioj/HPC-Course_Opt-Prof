@@ -698,8 +698,13 @@
     for {\tt gprof}
   \item[$\Rightarrow$] More fine tuning options in the doc
 
+    \begingroup
+    \leftskip0em
+    \rightskip\leftskip
     \makebox[0pt][r]{\tiny last gcc doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html}}
+    \par
+    \endgroup
 
     \begingroup
     \leftskip0em
@@ -760,6 +765,152 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \item Vectorization
   \end{itemize}
 }
+
+\begin{frame}[fragile]{Basic optimization techniques: Loop fusion}
+
+  \underline{Loop fusion}
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
+        for(i=0; i<N; i++)
+          x = x + a[i] + b[i];
+
+        for(j=0;j<N;j++)
+          y = y + a[i] + c[i];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
+        for(i=0; i<N; i++) {
+          x = x + a[i] + b[i];
+          y = y + a[i] + c[i];
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loop unrolling}
+
+  \underline{Loop unrolling}
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
+        for(i=0; i<N; i++)
+          x = x + a[i] + b[i];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
+        for(i=0; i<N; i+=4) {
+          x = x + a[i] + b[i];
+          x = x + a[i+1] + b[i+1];
+          x = x + a[i+2] + b[i+2];
+          x = x + a[i+3] + b[i+3];
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loop unroll-and-jam}
+
+  \underline{Loop unroll-and-jam}
+
+  \begin{columns}
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        for(i=0; i<N; i++)
+          for(j=0; j<2; j++)
+            x = x + a[i][j] + b[i][j];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.55\textwidth}{
+      \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
+        for(i=0; i<N; i+=2) {
+          x = x + a[i][0] + b[i][0];
+          x = x + a[i][1] + b[i][1];
+          x = x + a[i+1][0] + b[i+1][0];
+          x = x + a[i+1][1] + b[i+1][1];
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loop interchange}
+
+  \underline{Loop interchange}
+
+  \begin{columns}
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        for(i=0; i<N; i++)
+          for(j=0; j<N; j++)
+            x = x + a[j][i] + b[j][i];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
+        for(j=0; j<N; j++)
+          for(i=0; i<N; i++)
+            x = x + a[j][i] + b[j][i];
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loop peeling}
+
+  \underline{Loop peeling}
+
+  \begin{columns}
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        int p = 10;
+
+        [...]
+
+        for(i=0; i<N; i++) {
+          x = x + a[i] + b[p];
+          p = i;
+        }
+      \end{lstlisting}
+    }
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
+
+
+        x = x + a[0] + b[10];
+
+        for(i=0; i<N; i++)
+          x = x + a[i] + b[i-1];
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
 
 \begin{frame}[fragile]{Helping the compiler to optimize code}
 
