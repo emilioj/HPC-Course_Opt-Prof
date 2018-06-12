@@ -360,6 +360,8 @@
   \end{description}
 }
 
+\subsection{Performance characterization and \emph{roofline} model}
+
 \frame{
   \frametitle{Typical performance metrics}
 
@@ -529,7 +531,7 @@
   \item[Debugging] ~\\
     gdb
   \item[Profiling and performance analysis] ~\\
-    gprof, gcov, valgrind, gperftools
+    gprof, valgrind
   \item[Performance characterization] ~\\
     Berkeley Lab's CS Roofline Toolkit
   \end{description}
@@ -758,6 +760,57 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \item Vectorization
   \end{itemize}
 }
+
+\begin{frame}[fragile]{Helping the compiler to optimize code}
+
+  \begin{itemize}
+  \item Declaring {\bf attributes}: \hfil {\tt \_\_attribute\_\_(( ))}
+    \begin{itemize}
+    \item of functions~\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html}}
+    \item of variables~\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Variable-Attributes.html}}
+    \item of types~\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Type-Attributes.html}}
+    \item etc.
+    \end{itemize}
+  \end{itemize}
+
+  \begin{lstlisting}[style=c,gobble=2,caption={Example: assume an
+      aligned pointer is returned}]
+    void* my_alloc1(size_t) __attribute__((assume_aligned(16)))
+  \end{lstlisting}
+
+  \pause
+
+  \begin{itemize}
+  \item Let's notice: There is some overlap between the purposes of
+    \underline{attributes} and \underline{pragmas}
+  \item Even though {\tt gcc} recommends {\tt \_\_attribute\_\_}, it
+    keeps {\tt \#pragma} mainly for compatibility issues
+  \end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Helping the compiler to optimize code}
+
+  \begin{itemize}
+  \item Prefetch: {\footnotesize \tt \_\_builtin\_prefetch (const void
+      *addr, ...)}
+    \begin{itemize}
+    \item use it carefully\ldots
+    \end{itemize}
+
+    \begin{lstlisting}[style=c,gobble=2,caption={Prefetching example}]
+      for (i = 0; i < n; i++) {
+        a[i] = a[i] + b[i];
+        __builtin_prefetch (&a[i+j], 1, 1);
+        __builtin_prefetch (&b[i+j], 0, 1);
+        /* … */
+      }
+    \end{lstlisting}
+  \end{itemize}
+
+\end{frame}
+
 
 \frame{
   \frametitle{Profile-guided optimization (PGO)}
@@ -1296,6 +1349,82 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{itemize}
 }
 
+
+
+\frame{
+  \frametitle{Valgrind: performance profiling with Callgrind}
+
+  \begin{description}
+  \item[Callgrind:] a profiling tool that records the function call history as a call-graph
+    \begin{itemize}
+    \item[\checkmark] Simple way of creating a CPU profile of your
+      application
+    \item[{\checkmark}] The profiling result is {\bf not} influenced by the
+      measurement.
+    \item[{\tt x}] Again: terribly slow!
+    \end{itemize}
+  \end{description}
+
+  \pause
+
+  \begin{itemize}
+  \item 2 post-mortem analysis tools:
+    \begin{itemize}
+    \item Command line: {\tt callgrind\_annotate}
+    \item Great visualizatoin tool to help us to interpretate
+      collected data: {\tt KCachegrind}
+    \end{itemize}
+  \item One interactive command line tool to control execution:
+    {\small \tt
+      callgrind\_control}
+  \end{itemize}
+}
+
+\begin{frame}[fragile]{Valgrind: Callgrind typical use}
+
+  How to use it?~\footnote{Windows binary (I dit not test it):
+    \url{http://sourceforge.net/projects/qcachegrindwin}}
+  \begin{itemize}
+  \item Compile your code with {\tt -g} (debugging symbols
+    $\Rightarrow$ line numbers)
+  \item Launch cachegrind:
+    \begin{lstlisting}
+      valgrind --tool=callgrind myprog arg1 arg2
+    \end{lstlisting}
+    \begin{itemize}
+    \item[$\rightarrow$] a {\tt callgrind.out.processid} file is
+      generated
+    \end{itemize}
+  \item Use {\tt kcachegrind} (GUI) or {\tt callgrind\_annotate} (CLI)
+    to analyze your profiling data:
+    \begin{lstlisting}
+      kcachegrind callgrind.out.processid
+    \end{lstlisting}
+
+    \begin{lstlisting}
+      cg_annotate [--auto=yes] callgrind.out.processid
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\frame{
+  \frametitle{Valgrind: Callgrind}
+
+  Collected data:
+  \begin{itemize}
+  \item number of instructions executed
+    \begin{itemize}
+    \item their relationship to source lines
+    \end{itemize}
+  \item caller/callee relationship between functions
+  \item numbers of function calls
+  \item[\em (opt)] cache simulation (similar co Cachegrind)
+  \item[\em (opt)] branch prediction (similar to Cachegrind)
+  \end{itemize}
+}
+
+\subsection{Evaluating memory usage}
+
 \begin{frame}[fragile]{Valgrind: detecting memory-related errors with
     Memcheck}
 
@@ -1405,95 +1534,12 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{itemize}
 }
 
-\frame{
-  \frametitle{Valgrind: performance profiling with Callgrind}
-
-  \begin{description}
-  \item[Callgrind:] a profiling tool that records the function call history as a call-graph
-    \begin{itemize}
-    \item[\checkmark] Simple way of creating a CPU profile of your
-      application
-    \item[{\checkmark}] The profiling result is {\bf not} influenced by the
-      measurement.
-    \item[{\tt x}] Again: terribly slow!
-    \end{itemize}
-  \end{description}
-
-  \pause
-
-  \begin{itemize}
-  \item 2 post-mortem analysis tools:
-    \begin{itemize}
-    \item Command line: {\tt callgrind\_annotate}
-    \item Great visualizatoin tool to help us to interpretate
-      collected data: {\tt KCachegrind}
-    \end{itemize}
-  \item One interactive command line tool to control execution:
-    {\small \tt
-      callgrind\_control}
-  \end{itemize}
-}
-
-\begin{frame}[fragile]{Valgrind: Callgrind typical use}
-
-  How to use it?~\footnote{Windows binary (I dit not test it):
-    \url{http://sourceforge.net/projects/qcachegrindwin}}
-  \begin{itemize}
-  \item Compile your code with {\tt -g} (debugging symbols
-    $\Rightarrow$ line numbers)
-  \item Launch cachegrind:
-    \begin{lstlisting}
-      valgrind --tool=callgrind myprog arg1 arg2
-    \end{lstlisting}
-    \begin{itemize}
-    \item[$\rightarrow$] a {\tt callgrind.out.processid} file is
-      generated
-    \end{itemize}
-  \item Use {\tt kcachegrind} (GUI) or {\tt callgrind\_annotate} (CLI)
-    to analyze your profiling data:
-    \begin{lstlisting}
-      kcachegrind callgrind.out.processid
-    \end{lstlisting}
-  \end{itemize}
-\end{frame}
-
-\frame{
-  \frametitle{Valgrind: Callgrind}
-
-  Collected data:
-  \begin{itemize}
-  \item number of instructions executed
-    \begin{itemize}
-    \item their relationship to source lines
-    \end{itemize}
-  \item caller/callee relationship between functions
-  \item numbers of function calls
-  \item[\em (opt)] cache simulation (similar co Cachegrind)
-  \item[\em (opt)] branch prediction (similar to Cachegrind)
-  \end{itemize}
-}
-
-\subsection{Evaluating memory usage}
-
-\frame{
-}
-
-\subsection{Evaluating cache usage and performance}
-
-\frame{
-}
+% \subsection{Evaluating cache usage and performance}
 
 
-\subsection{The \emph{roofline} model}
+% \subsection{Strategies to detect vectorization and parallelization
+%   opportunities}
 
-\frame{
-}
-
-\subsection{Strategies to detect vectorization and parallelization
-  opportunities}
-
-\frame{
-}
 
 
 

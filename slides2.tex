@@ -64,20 +64,22 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\begin{frame}{Contents: Lesson 1 and 2}
+\begin{frame}{Contents: Lesson 1}
   \setbeamertemplate{section in toc}[sections numbered]
   \setbeamertemplate{subsection in toc}[ball unnumbered]
   \tableofcontents[sections={1-2}]
 \end{frame}
 
-\begin{frame}{Contents: Lesson 3}
-  \setbeamertemplate{section in toc}[sections numbered]
-  \setbeamertemplate{subsection in toc}[ball unnumbered]
-  \tableofcontents[sections={3}]
-\end{frame}
+% \begin{frame}{Contents: Lesson 3}
+%   \setbeamertemplate{section in toc}[sections numbered]
+%   \setbeamertemplate{subsection in toc}[ball unnumbered]
+%   \tableofcontents[sections={3}]
+% \end{frame}
 
 
 \section{Optimization and Profiling of Parallel Code}
+
+\subsection{Paraver et al: an overview}
 
 \frame{
   \frametitle{\insertsectionhead}
@@ -294,6 +296,14 @@
 
 \frame{
   \frametitle{Extrae: XML configuration}
+
+  See examples in {\tt \${EXTRAE\_HOME}/example/LINUX}
+
+  For example:
+  \begin{itemize}
+  \item for MPI + OpenMP:\\
+    {\tt \${EXTRAE\_HOME}/example/LINUX/MPI+OMP/extrae.xml}
+  \end{itemize}
 }
 
 \begin{frame}[fragile]{Extrae: job sumission and trace files}
@@ -368,49 +378,49 @@
   \end{description}
 }
 
-\subsection{Shared memory (OpenMP)}
+% \subsection{Shared memory (OpenMP)}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsubsection{Load balancing optimization}
+% \subsubsection{Load balancing optimization}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsubsection{Communication analysis and optimization}
+% \subsubsection{Communication analysis and optimization}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsection{Distributed memory (MPI)}
+% \subsection{Distributed memory (MPI)}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsubsection{Load balancing optimization}
+% \subsubsection{Load balancing optimization}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsubsection{Communication analysis and optimization}
+% \subsubsection{Communication analysis and optimization}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsection{Hybrid parallel programming: shared + distributed Mem}
+% \subsection{Hybrid parallel programming: shared + distributed Mem}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsubsection{Load balancing optimization}
+% \subsubsection{Load balancing optimization}
 
-\frame{
-}
+% \frame{
+% }
 
-\subsubsection{Communication analysis and optimization}
+% \subsubsection{Communication analysis and optimization}
 
-\frame{
-}
+% \frame{
+% }
 
 \end{document}
