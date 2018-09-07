@@ -64,75 +64,47 @@
   \end{itemize}
 }
 
-\subsection{HPC \& Computer Organization and Architecture basics}
+\subsection{Computer organization \& architecture: basics}
 
 \frame{
-  \frametitle{Forms of parallel computing}
-
-  \begin{itemize}
-  \item Bit-level parallelism
-  \item Instruction-level parallelism (ILP)
-  \item Data-level parallelism (DLP)
-  \item Task-level parallelism (TLP)
-  \end{itemize}
-}
-
-\frame{
-  \frametitle{A taxonomy of computer architectures}
-
-  Flynn's taxonomy (1966!)
-
-  \begin{description}
-  \item[SISD] Single Instruction stream; Single Data stream
-  \item[MISD] Multiple Instruction stream; Single Data stream
-  \item[SIMD] Single Instruction stream; Multiple Data stream
-    \only<2->{
-      \begin{description}
-      \item[\alert{\footnotesize (variant)} SIMT] Single Instruction; Multiple Threads
-      \end{description}
-    }
-  \item[MIMD] Multiple Instruction stream; Multiple Data stream
-    \only<3>{
-      \begin{description}
-      \item[\alert{\footnotesize (typically)} SPMD] Single Program; Multiple Data
-      \end{description}
-    }
-  \end{description}
+  \frametitle{Computer organization: CPU, Mem \& I/O}
 
   \begin{figure}
-    \includegraphics[width=0.25\textwidth]{SISD}~
-    \includegraphics[width=0.25\textwidth]{MISD}~
-    \includegraphics[width=0.25\textwidth]{SIMD}~
-    \includegraphics[width=0.25\textwidth]{MIMD}
-    \caption{By I, Cburnett, CC BY-SA 3.0,
-      \url{https://commons.wikimedia.org/w/index.php?curid=2233537}}
+    \includegraphics[width=\textwidth]{computerstruct}
+    \caption{3 main subsystems of a computer: CPU, Memory and Input/Output}
   \end{figure}
 }
 
 \frame{
-  \frametitle{Parallel processing in Flynn's taxonomy}
+  \frametitle{The processor}
 
-  \begin{block}{SISD: exploit ILP}
-    \begin{itemize}
-    \item Superscalar processors
-    \item Pipelining
-    \end{itemize}
+  \begin{block}{Basically\ldots}
+    Carries out the instructions of a computer program by performing
+    the basic {\bf arithmetic}, {\bf logical}, {\bf control} and {\bf
+      I/O} operations specified by the instructions.
   \end{block}
 
-  \begin{block}{SIMD: exploit data parallelism}
-    \begin{itemize}
-    \item Array and Vector processors
-    \item Vector extensions in general purpose CPU
-    \item GPGPU or similar approaches based on co-processors
-    \end{itemize}
-  \end{block}
+  \begin{columns}
+    \column{0.3\textwidth}{
+      \begin{figure}
+        \includegraphics[width=\textwidth]{SISD_alt}
+      \end{figure}
+    }
 
-  \begin{block}{MIMD: exploit task parallelism}
-    \begin{itemize}
-    \item Multicore, multiprocessor and multicomputer architectures
-    \end{itemize}
-  \end{block}
+    \pause
 
+    \column{0.7\textwidth}{
+      \begin{itemize}
+      \item[$\Rightarrow$] both Data \& Instructions taken from mem
+        \pause
+      \item[$\Rightarrow$] common scenario these days: multi-proc/multi-core systems
+      \end{itemize}
+      \begin{figure}
+        \includegraphics[width=0.4\textwidth]{MIMD_alt}
+        \caption*{\ldots more on this later}
+      \end{figure}
+    }
+  \end{columns}
 }
 
 \frame{
@@ -225,6 +197,77 @@
       {\scriptsize By Trisha Gee, CC BY 3.0,
         \url{http://trishagee.github.io/post/dissecting_the_disruptor_why_its_so_fast_part_two__magic_cache_line_padding}}}
   \end{figure}
+}
+
+\subsection{High performance computing (HPC): basics}
+
+\frame{
+  \frametitle{Forms of parallel computing}
+
+  \begin{itemize}
+  \item Bit-level parallelism
+  \item Instruction-level parallelism (ILP)
+  \item Data-level parallelism (DLP)
+  \item Task-level parallelism (TLP)
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{A taxonomy of computer architectures}
+
+  Flynn's taxonomy (1966!)
+
+  \begin{description}
+  \item[SISD] Single Instruction stream; Single Data stream
+  \item[MISD] Multiple Instruction stream; Single Data stream
+  \item[SIMD] Single Instruction stream; Multiple Data stream
+    \only<2->{
+      \begin{description}
+      \item[\alert{\footnotesize (variant)} SIMT] Single Instruction; Multiple Threads
+      \end{description}
+    }
+  \item[MIMD] Multiple Instruction stream; Multiple Data stream
+    \only<3>{
+      \begin{description}
+      \item[\alert{\footnotesize (typically)} SPMD] Single Program; Multiple Data
+      \end{description}
+    }
+  \end{description}
+
+  \begin{figure}
+    \includegraphics[width=0.25\textwidth]{SISD}~
+    \includegraphics[width=0.25\textwidth]{MISD}~
+    \includegraphics[width=0.25\textwidth]{SIMD}~
+    \includegraphics[width=0.25\textwidth]{MIMD}
+    \caption{By I, Cburnett, CC BY-SA 3.0,
+      \url{https://commons.wikimedia.org/w/index.php?curid=2233537}}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Parallel processing in Flynn's taxonomy}
+
+  \begin{block}{SISD: exploit ILP}
+    \begin{itemize}
+    \item Superscalar processors
+    \item Pipelining
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{SIMD: exploit data parallelism}
+    \begin{itemize}
+    \item Array and Vector processors
+    \item Vector extensions in general purpose CPU
+    \item GPGPU or similar approaches based on co-processors
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{MIMD: exploit task parallelism}
+    \begin{itemize}
+    \item Multicore, multiprocessor and multicomputer architectures
+    \end{itemize}
+  \end{block}
+
 }
 
 \frame{
