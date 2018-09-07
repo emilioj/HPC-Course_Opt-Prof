@@ -1,0 +1,52 @@
+\usetheme[subsectionpage=progressbar]{metropolis}
+
+\usepackage{FiraSans}
+\setsansfont[BoldFont={FiraSans-Regular},ItalicFont={FiraSans-LightItalic},BoldItalicFont={FiraSans-Italic}]{FiraSans-Light.otf}
+\usepackage{FiraMono}
+\setmonofont[BoldFont={FiraMono-Medium}]{FiraMono-Regular.otf}
+
+\setbeamertemplate{itemize subitem}{--}
+\setbeamerfont{caption}{size=\footnotesize}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{listings}
+\lstset{
+  basicstyle=\footnotesize\ttfamily,
+  backgroundcolor = \color{gray!20}
+}
+\lstdefinestyle{c}{language=C,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  % identifierstyle=\color{blue},
+  stringstyle=\color{orange}
+}
+\lstdefinestyle{shell}{language=sh,
+  commentstyle=\itshape\color{purple!40!black},
+  moredelim=**[is][\only<2->{\color{red}}]{@}{@},
+  moredelim=**[is][\only<3>{\color{blue}}]{¿}{¿}
+}
+\lstdefinestyle{asm}{language=[x86masm]Assembler,
+  commentstyle=\itshape\color{purple!40!black},
+}
+\lstdefinestyle{valgrind}{basicstyle=\footnotesize\ttfamily,
+  backgroundcolor = {},
+}
+\usepackage{caption}
+\captionsetup[lstlisting]{font={small,tt}, labelformat=empty,
+  labelsep=none}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{expl3}
+\ExplSyntaxOn
+\int_zero_new:N \g__prg_map_int
+\ExplSyntaxOff
+\usepackage{tikz}
+\usetikzlibrary{tikzmark,decorations.pathreplacing,calligraphy}
+
+% Figure's path
+\graphicspath{{./figs/}}
