@@ -1,0 +1,13 @@
+* LaTeX Beamer slides
+** Generate PDF
+   #+BEGIN_EXAMPLE
+   % make
+   #+END_EXAMPLE
+** Dependencies
+   - Theme: Metropolis
+     https://github.com/matze/mtheme
+     + Debian package: texlive-latex-extra
+   - Fonts: Fira Sans
+     https://github.com/bBoxType/FiraSans
+     + Debian package: texlive-fonts-extra
+   - XeLaTeX
