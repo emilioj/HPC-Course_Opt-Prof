@@ -594,6 +594,296 @@
   \end{figure}
 }
 
+\subsection{Basic code optimizations}
+
+\frame{
+  \frametitle{\insertsubsectionhead}
+
+  \begin{block}{Basic code optimization techniques}
+  Can be applied by
+  \begin{itemize}
+  \item programmer
+  \item compiler (maybe)
+  \end{itemize}
+  \end{block}
+
+  \setbeamertemplate{itemize item}[triangle]
+  \begin{itemize}
+  \item Loops optimizations
+  \item Inlining
+  \item Use registers
+  \item Reduce and improve conditionals
+  \item Memory data layout
+    \begin{itemize}
+    \item Mem alignment
+    \item Aliasing
+    \end{itemize}
+  \item Prefetching
+  \item Vectorization
+  \end{itemize}
+}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (I)}
+
+  \underline{Loop fusion}
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
+        for(i=0; i<N; i++)
+          x = x + a[i] + b[i];
+
+        for(j=0;j<N;j++)
+          y = y + a[i] + c[i];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
+        for(i=0; i<N; i++) {
+          x = x + a[i] + b[i];
+          y = y + a[i] + c[i];
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (II)}
+
+  \underline{Loop fission} (aka loop distribution)
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
+        for(i=0; i<N; i++) {
+          x = x + a[i] + b[i];
+          y = y + c[i] + d[i];
+        }
+      \end{lstlisting}
+    }
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
+        for(i=0; i<N; i++)
+          x = x + a[i] + b[i];
+
+        for(i=0; i<N; i++)
+          y = y + c[i] + d[i];
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (III)}
+
+  \underline{Loop unrolling} (aka loop unwinding)
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
+        for(i=0; i<N; i++)
+          x = x + a[i] + b[i];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
+        for(i=0; i<N; i+=4) {
+          x = x + a[i] + b[i];
+          x = x + a[i+1] + b[i+1];
+          x = x + a[i+2] + b[i+2];
+          x = x + a[i+3] + b[i+3];
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (IV)}
+
+  \underline{Loop unroll-and-jam}
+
+  \begin{columns}
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        for(i=0; i<N; i++)
+          for(j=0; j<2; j++)
+            x = x + a[i][j] + b[i][j];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.55\textwidth}{
+      \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
+        for(i=0; i<N; i+=2) {
+          x = x + a[i][0] + b[i][0];
+          x = x + a[i][1] + b[i][1];
+          x = x + a[i+1][0] + b[i+1][0];
+          x = x + a[i+1][1] + b[i+1][1];
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (V)}
+
+  \underline{Loop interchange}
+
+  \begin{columns}
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        for(i=0; i<N; i++)
+          for(j=0; j<N; j++)
+            x = x + a[j][i] + b[j][i];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
+        for(j=0; j<N; j++)
+          for(i=0; i<N; i++)
+            x = x + a[j][i] + b[j][i];
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (VI)}
+
+  \underline{Loop-invariant code motion} (aka hoisting)
+
+  \begin{columns}
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=3,caption={Original code}]
+        for(i=0; i<N; i++)
+          x = x + a[i] + f(p);
+      \end{lstlisting}
+    }
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=3,caption={Optimized code}]
+        double tmp = f(p)
+
+        for(i=0; i<N; i++)
+          x = x + a[i] + tmp;
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (VII)}
+
+  \underline{Loop peeling}
+
+  \begin{columns}
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=3,caption={Original code}]
+        int p = 10;
+
+        [...]
+
+        for(i=0; i<N; i++) {
+          x = x + a[i] + b[p];
+          p = i;
+        }
+      \end{lstlisting}
+    }
+
+    \column[t]{0.5\textwidth}{
+      \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
+
+        x = x + a[0] + b[10];
+
+        for(i=0; i<N; i++)
+          x = x + a[i] + b[i-1];
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Loops (VIII)}
+
+  \underline{Loop blocking / tiling}
+
+  \begin{columns}
+
+    \column[t]{0.4\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        float a[10], v[1000];
+
+        for(i=0; i<10; i++)
+          for(j=0; j<1000; j++)
+            a[i] += i * v[j];
+      \end{lstlisting}
+    }
+
+    \column[t]{0.6\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
+        float a[10], v[1000];
+
+        // Let's assume 16floats/linecache
+        for(jj=0; jj<1000; jj+=16)
+          for(i=0; i<10; i++)
+            for(j=jj; j<min(jj+16,1000); j++)
+              a[i] += i * v[j];
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Basic optimization techniques: Inlining}
+
+  \underline{Inlining}
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        double func(int a) {
+          return sqrt(a) + sin(a);
+        }
+
+        for (i=0; i<1N; i++)
+          x = x + func(i);
+      \end{lstlisting}
+    }
+
+    \column[t]{0.45\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
+        for (i=0; i<1N; i++)
+          x = x + sqrt(i) + sin(i);
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
 \subsection{Compiler optimizations}
 
 \frame{
@@ -765,152 +1055,6 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \item Vectorization
   \end{itemize}
 }
-
-\begin{frame}[fragile]{Basic optimization techniques: Loop fusion}
-
-  \underline{Loop fusion}
-
-  \begin{columns}
-
-    \column[t]{0.45\textwidth}{
-      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
-        for(i=0; i<N; i++)
-          x = x + a[i] + b[i];
-
-        for(j=0;j<N;j++)
-          y = y + a[i] + c[i];
-      \end{lstlisting}
-    }
-
-    \column[t]{0.45\textwidth}{
-      \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
-        for(i=0; i<N; i++) {
-          x = x + a[i] + b[i];
-          y = y + a[i] + c[i];
-        }
-      \end{lstlisting}
-    }
-
-  \end{columns}
-
-\end{frame}
-
-\begin{frame}[fragile]{Basic optimization techniques: Loop unrolling}
-
-  \underline{Loop unrolling}
-
-  \begin{columns}
-
-    \column[t]{0.45\textwidth}{
-      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
-        for(i=0; i<N; i++)
-          x = x + a[i] + b[i];
-      \end{lstlisting}
-    }
-
-    \column[t]{0.5\textwidth}{
-      \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
-        for(i=0; i<N; i+=4) {
-          x = x + a[i] + b[i];
-          x = x + a[i+1] + b[i+1];
-          x = x + a[i+2] + b[i+2];
-          x = x + a[i+3] + b[i+3];
-        }
-      \end{lstlisting}
-    }
-
-  \end{columns}
-
-\end{frame}
-
-\begin{frame}[fragile]{Basic optimization techniques: Loop unroll-and-jam}
-
-  \underline{Loop unroll-and-jam}
-
-  \begin{columns}
-
-    \column[t]{0.5\textwidth}{
-      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
-        for(i=0; i<N; i++)
-          for(j=0; j<2; j++)
-            x = x + a[i][j] + b[i][j];
-      \end{lstlisting}
-    }
-
-    \column[t]{0.55\textwidth}{
-      \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
-        for(i=0; i<N; i+=2) {
-          x = x + a[i][0] + b[i][0];
-          x = x + a[i][1] + b[i][1];
-          x = x + a[i+1][0] + b[i+1][0];
-          x = x + a[i+1][1] + b[i+1][1];
-        }
-      \end{lstlisting}
-    }
-
-  \end{columns}
-
-\end{frame}
-
-\begin{frame}[fragile]{Basic optimization techniques: Loop interchange}
-
-  \underline{Loop interchange}
-
-  \begin{columns}
-
-    \column[t]{0.5\textwidth}{
-      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
-        for(i=0; i<N; i++)
-          for(j=0; j<N; j++)
-            x = x + a[j][i] + b[j][i];
-      \end{lstlisting}
-    }
-
-    \column[t]{0.5\textwidth}{
-      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
-        for(j=0; j<N; j++)
-          for(i=0; i<N; i++)
-            x = x + a[j][i] + b[j][i];
-      \end{lstlisting}
-    }
-
-  \end{columns}
-
-\end{frame}
-
-\begin{frame}[fragile]{Basic optimization techniques: Loop peeling}
-
-  \underline{Loop peeling}
-
-  \begin{columns}
-
-    \column[t]{0.5\textwidth}{
-      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
-        int p = 10;
-
-        [...]
-
-        for(i=0; i<N; i++) {
-          x = x + a[i] + b[p];
-          p = i;
-        }
-      \end{lstlisting}
-    }
-
-    \column[t]{0.5\textwidth}{
-      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
-
-
-        x = x + a[0] + b[10];
-
-        for(i=0; i<N; i++)
-          x = x + a[i] + b[i-1];
-      \end{lstlisting}
-    }
-
-  \end{columns}
-
-\end{frame}
 
 \begin{frame}[fragile]{Helping the compiler to optimize code}
 
