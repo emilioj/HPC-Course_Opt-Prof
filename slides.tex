@@ -508,7 +508,7 @@
 
 
 
-\section{Optimization and Profiling of (mainly) Sequential Code}
+\section{Code optimizations at compilation time}
 
 \frame{
   \frametitle{The art of computer programming: some
@@ -588,7 +588,8 @@
 
   Something a (good) programmer should know to write efficient code:
   \begin{itemize}
-  \item different \emph{``types of memory''}
+  \item the memory hierarchy
+  \item different \emph{``types of memory''} {\small (even when talking about \emph{Main Memory})}
   \item how variables are mapped to memory locations
   \end{itemize}
   \begin{figure}
@@ -613,15 +614,20 @@
   \setbeamertemplate{itemize item}[triangle]
   \begin{itemize}
   \item Loops optimizations
+    \begin{itemize}
+    \item Loop unrolling, Loop peeling\ldots
+    \end{itemize}
   \item Inlining
-  \item Use registers
   \item Reduce and improve conditionals
+  \item Use registers
   \item Memory data layout
     \begin{itemize}
     \item Mem alignment
     \item Aliasing
     \end{itemize}
   \item Prefetching
+  \item Interprocedural optimizations
+  \item Profile-guided optimizations (PGO)
   \item Vectorization
   \end{itemize}
 }
@@ -887,6 +893,82 @@
 
 \end{frame}
 
+\begin{frame}[fragile]{Basic optimization techniques: Conditionals}
+
+  \begin{columns}
+
+    \column[t]{0.56\textwidth}{
+      \underline{Simplify logic expressions}:\\[-0.1cm]
+      \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
+        if (t1 == 0 && t2 == 0 && t3 == 0)
+      \end{lstlisting}
+    }
+
+    \column[t]{0.4\textwidth}{\vspace*{-0.1cm}
+      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
+        if ((t1 | t2 | t3) == 0)
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+  \pause
+  \vfill
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \underline{Leverage shortcut evaluation}:\\[-0.1cm]
+      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
+        if (usually_true()
+            && usually_false())
+      \end{lstlisting}
+    }
+
+    \column[t]{0.45\textwidth}{\vspace*{-0.1cm}
+      \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
+        if (usually_false()
+            && usually_true())
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+  \pause
+  \vfill
+
+  \begin{columns}
+
+    \column[t]{0.45\textwidth}{
+      \underline{Loop-invariant conditional motion}:\\[-0.1cm]
+      \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
+        for (i=0; i<N; i++)
+          if (op == 'a')
+            doOpA(v[i]);
+          else if (k > 3)
+            doOpB(v[i], 3);
+          else
+            doOpB(v[i], k);
+      \end{lstlisting}
+    }
+
+    \column[t]{0.47\textwidth}{
+      \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
+        if (op == 'a')
+          for (i=0; i<N; i++)
+            doOpA(v[i]);
+        else {
+          int tmp = (k > 3) ? 3 : k;
+          for (i=0; i<N; i++)
+            doOpB(v[i], tmp);
+        }
+      \end{lstlisting}
+    }
+
+  \end{columns}
+
+\end{frame}
+
 \subsection{Compiler optimizations}
 
 \frame{
@@ -898,20 +980,20 @@
 
     {\small \tt gcc [-Q] --help=optimizers}
 
-    \makebox[0pt][r]{\tiny last gcc doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{last gcc doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html}}
 
-    \makebox[0pt][r]{\tiny gcc 6.4 doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{gcc 6.4 doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc-6.4.0/gcc/Optimize-Options.html}}\\[0.5cm]
 
   \item Target-specific / machine-dependent options (x86)
 
     {\tt gcc [-Q] --help=target}
 
-    \makebox[0pt][r]{\tiny last gcc doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{last gcc doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc/x86-Options.html}}
 
-    \makebox[0pt][r]{\tiny gcc 6.4 doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{gcc 6.4 doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc-6.4.0/gcc/x86-Options.html}}
   \end{itemize}
   }
@@ -971,13 +1053,13 @@
     optimizations that do not interfere with debugging
   \item[$\Rightarrow$] More fine tuning options in the doc
 
-    \makebox[0pt][r]{\tiny last gcc doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{last gcc doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html}}
 
     \begingroup
     \leftskip0em
     \rightskip\leftskip
-    \makebox[0pt][r]{\tiny gcc 6.4 doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{gcc 6.4 doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc-6.4.0/gcc/Debugging-Options.html}}
     \par
     \endgroup
@@ -994,7 +1076,7 @@
     \begingroup
     \leftskip0em
     \rightskip\leftskip
-    \makebox[0pt][r]{\tiny last gcc doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{last gcc doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html}}
     \par
     \endgroup
@@ -1002,7 +1084,7 @@
     \begingroup
     \leftskip0em
     \rightskip\leftskip
-    \makebox[0pt][r]{\tiny gcc 6.4 doc $\rightarrow$\hspace*{0.15cm}}{\scriptsize
+    \makebox[0pt][r]{\tiny \alert{gcc 6.4 doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
       \url{http://gcc.gnu.org/onlinedocs/gcc-6.4.0/gcc/Instrumentation-Options.html}}
     \par
     \endgroup
@@ -1034,28 +1116,36 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 
 \end{frame}
 
-\frame{
-  \frametitle{Some key optimizations at compilation~\footnote{\ldots or at
-      \emph{coding time}, some of them} time}
 
+\section{Helping the compiler to optimize}
+
+\frame{
+  \frametitle{Some key optimizations at compilation/coding
+    time~\footnote{This slide is replicated on purpose!}}
+
+    Can be applied by
+    \begin{itemize}
+    \item programmer (at \emph{coding time})
+    \item compiler (maybe)
+    \end{itemize}
+
+  \setbeamertemplate{itemize item}[triangle]
   \begin{itemize}
-  \item Use registers
+  \item Loops optimizations
+    \begin{itemize}
+    \item Loop unrolling, Loop peeling\ldots
+    \end{itemize}
   \item Inlining
   \item Reduce and improve conditionals
-  \item Loop optimizations
-    \begin{itemize}
-    \item Loop unrolling
-    \item Loop peeling
-    \end{itemize}
+  \item Use registers
   \item Memory data layout
     \begin{itemize}
-    \item Mem alignment
-    \item Aliasing
+    \item Mem alignment, Aliasing\ldots
     \end{itemize}
   \item Prefetching
   \item Interprocedural optimizations
   \item Profile-guided optimizations (PGO)
-  \item Vectorization
+  \item Vectorization (SIMD) and/or Parallelization (MIMD)
   \end{itemize}
 }
 
