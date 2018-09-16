@@ -2,6 +2,8 @@ all: slides
 
 slides: slides.tex
 	xelatex slides
+	bibtex slides
+	xelatex slides
 	xelatex slides
 
 clean:
