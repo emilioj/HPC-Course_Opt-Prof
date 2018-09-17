@@ -406,6 +406,17 @@
 }
 
 \frame{
+  \frametitle{Parallel application's performance key: Scalability}
+
+  \vspace*{-0.4cm}
+  \begin{figure}\raggedright
+    \includegraphics[height=.45\textheight]{scalability_strong}
+    \includegraphics[height=.45\textheight]{scalability_weak}
+    \caption{Scalability: {\bf weak} versus {\bf strong} scaling}
+  \end{figure}
+}
+
+\frame{
   \frametitle{Performance characterization}
 
   Identifying the dominant bottleneck:
@@ -554,15 +565,15 @@
 
     \pause
 
-  \item Terminal multiplexer: {\tt tmux} or {\tt screen}
+  \item Terminal multiplexer: {\small {\tt tmux} or {\tt screen}}
 
     \pause
 
   \item System utilities/commands:
     \begin{description}
-    \item[{\tt top}] (or htop\ldots)
-    \item[{\tt pstack}] ~
-    \item[{\tt ps}] and similars\ldots
+    \item[{\small \tt top}] {\small (or {\tt htop})}
+    \item[{\small \tt pstack}] ~
+    \item[{\small \tt ps}] and similars\ldots
     \end{description}
     \begin{itemize}
     \item I particularly like {\tt top}:
@@ -576,9 +587,12 @@
 
     \pause
 
-  \item \includegraphics[width=2.5cm]{stackoverflow}
+  \item Documentation and code snippets:
     \begin{itemize}
-    \item \ldots and the rest of the Internet! (webs, chats, etc.)
+    \item {\tt man} pages (and {\tt TLDR} pages, \emph{because life is
+        too short to read man pages})
+    \item System documentation in {\tt /usr/share/doc}
+    \item \href{https://stackoverflow.com}{\includegraphics[width=2.5cm]{stackoverflow}}
     \end{itemize}
   \end{itemize}
 }
