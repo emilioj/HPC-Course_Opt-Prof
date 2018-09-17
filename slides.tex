@@ -597,18 +597,95 @@
   \end{itemize}
 }
 
-\frame{
-  \frametitle{Where are things in memory?}
+\subsection{Understanding the compilation process}
 
-  Something a (good) programmer should know to write efficient code:
+\frame{
+  \frametitle{\insertsubsectionhead: Compilers}
+
+  \begin{quote}
+    Compilers translate code from one language to another
+  \end{quote}
+
+  \pause
+
+  \begin{description}
+  \item[Source code:] usually written in a programming language
+  \item[Target/Object code:] usually machine code (i.e. binary)
+    \begin{itemize}
+    \item[$\Rightarrow$] Most common reason: create an executable
+      program
+    \end{itemize}
+  \end{description}
+}
+
+\frame{
+  \frametitle{\insertsubsectionhead}
+
+  \begin{figure}
+    \begin{overprint}
+      \onslide<1>
+      \includegraphics[height=.9\textheight]{compiling}
+      \onslide<2>
+      \includegraphics[height=.9\textheight]{compiling2}
+    \end{overprint}
+    \caption{Compilation process in C (Unix-like environments)}
+  \end{figure}
+}
+
+\subsection{Operating system basics}
+
+\frame{
+  \frametitle{Processes and Threads}
+
+  \begin{block}{\begin{quote}A process is an instance of a program
+        running in the O.S.\end{quote}}
+
+    \pause
+
+    \begin{itemize}
+    \item Each process provides the resources needed to execute a
+      program:
+      \begin{itemize}
+      \item virtual address space, executable code, environment
+        variables\ldots{} and at least one \underline{thread of
+          execution}.
+      \item[$\Rightarrow$] Each process is started with a single
+        thread, but can create additional threads from any of its
+        threads.
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{block}{\begin{quote}A thread is an independent flow of
+        control inside an address space.\end{quote}}
+
+    \pause
+
+    \begin{itemize}
+    \item All threads of a process share its virtual address space and
+      some system resources.
+    \item Each threads maintains local storage and its own context:
+      kernel and user stack, registers\ldots
+    \end{itemize}
+  \end{block}
+}
+
+\frame{
+  \frametitle{Virtual Memory: Anatomy of a process in memory}
+
   \begin{itemize}
-  \item the memory hierarchy
-  \item different \emph{``types of memory''} {\small (even when talking about \emph{Main Memory})}
-  \item how variables are mapped to memory locations
+  \item Each process runs in its own virtual address space (kind of a
+    \emph{sandbox})
+  \item A portion of that virtual address space is reserved to the
+    kernel
+  \item The rest is user space:
   \end{itemize}
+
   \begin{figure}
     \includegraphics[width=0.8\textwidth]{memlayout}
-    \caption{Program memory layout of Linux Executables}
+    \caption{Standard segment layout in a Linux process}
   \end{figure}
 }
 
