@@ -522,16 +522,14 @@
 \section{Code optimizations at compilation time}
 
 \frame{
-  \frametitle{The art of computer programming: some
-    \underline{keywords}}
+  \frametitle{The art of computer programming: typical workflow}
 
   \begin{itemize}
-  \item Code
-  \item Compile
-  \item Link
-  \item Debug
-  \item Profile
-  \item Optimize
+  \item Coding
+  \item Compiling (\& Linking)
+  \item Debugging
+  \item Profiling
+  \item Optimizing
   \end{itemize}
 }
 
@@ -731,17 +729,17 @@
 
     \column[t]{0.45\textwidth}{
       \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
-        for(i=0; i<N; i++)
+        for (i=0; i<N; i++)
           x = x + a[i] + b[i];
 
-        for(j=0;j<N;j++)
+        for (j=0; j<N; j++)
           y = y + a[i] + c[i];
       \end{lstlisting}
     }
 
     \column[t]{0.45\textwidth}{
       \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
-        for(i=0; i<N; i++) {
+        for (i=0; i<N; i++) {
           x = x + a[i] + b[i];
           y = y + a[i] + c[i];
         }
@@ -760,7 +758,7 @@
 
     \column[t]{0.45\textwidth}{
       \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
-        for(i=0; i<N; i++) {
+        for (i=0; i<N; i++) {
           x = x + a[i] + b[i];
           y = y + c[i] + d[i];
         }
@@ -769,10 +767,10 @@
 
     \column[t]{0.45\textwidth}{
       \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
-        for(i=0; i<N; i++)
+        for (i=0; i<N; i++)
           x = x + a[i] + b[i];
 
-        for(i=0; i<N; i++)
+        for (i=0; i<N; i++)
           y = y + c[i] + d[i];
         }
       \end{lstlisting}
@@ -790,14 +788,14 @@
 
     \column[t]{0.45\textwidth}{
       \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
-        for(i=0; i<N; i++)
+        for (i=0; i<N; i++)
           x = x + a[i] + b[i];
       \end{lstlisting}
     }
 
     \column[t]{0.5\textwidth}{
-      \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
-        for(i=0; i<N; i+=4) {
+      \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
+        for (i=0; i<N; i+=4) {
           x = x + a[i] + b[i];
           x = x + a[i+1] + b[i+1];
           x = x + a[i+2] + b[i+2];
@@ -818,15 +816,15 @@
 
     \column[t]{0.5\textwidth}{
       \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
-        for(i=0; i<N; i++)
-          for(j=0; j<2; j++)
+        for (i=0; i<N; i++)
+          for (j=0; j<2; j++)
             x = x + a[i][j] + b[i][j];
       \end{lstlisting}
     }
 
     \column[t]{0.55\textwidth}{
       \begin{lstlisting}[style=c,gobble=6,caption={Optimized code}]
-        for(i=0; i<N; i+=2) {
+        for (i=0; i<N; i+=2) {
           x = x + a[i][0] + b[i][0];
           x = x + a[i][1] + b[i][1];
           x = x + a[i+1][0] + b[i+1][0];
@@ -847,16 +845,16 @@
 
     \column[t]{0.5\textwidth}{
       \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
-        for(i=0; i<N; i++)
-          for(j=0; j<N; j++)
+        for (i=0; i<N; i++)
+          for (j=0; j<N; j++)
             x = x + a[j][i] + b[j][i];
       \end{lstlisting}
     }
 
     \column[t]{0.5\textwidth}{
       \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
-        for(j=0; j<N; j++)
-          for(i=0; i<N; i++)
+        for (j=0; j<N; j++)
+          for (i=0; i<N; i++)
             x = x + a[j][i] + b[j][i];
       \end{lstlisting}
     }
@@ -873,7 +871,7 @@
 
     \column[t]{0.5\textwidth}{
       \begin{lstlisting}[style=c,gobble=3,caption={Original code}]
-        for(i=0; i<N; i++)
+        for (i=0; i<N; i++)
           x = x + a[i] + f(p);
       \end{lstlisting}
     }
@@ -882,7 +880,7 @@
       \begin{lstlisting}[style=c,gobble=3,caption={Optimized code}]
         double tmp = f(p)
 
-        for(i=0; i<N; i++)
+        for (i=0; i<N; i++)
           x = x + a[i] + tmp;
       \end{lstlisting}
     }
@@ -903,7 +901,7 @@
 
         [...]
 
-        for(i=0; i<N; i++) {
+        for (i=0; i<N; i++) {
           x = x + a[i] + b[p];
           p = i;
         }
@@ -915,7 +913,7 @@
 
         x = x + a[0] + b[10];
 
-        for(i=0; i<N; i++)
+        for (i=0; i<N; i++)
           x = x + a[i] + b[i-1];
       \end{lstlisting}
     }
@@ -934,20 +932,20 @@
       \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
         float a[10], v[1000];
 
-        for(i=0; i<10; i++)
-          for(j=0; j<1000; j++)
+        for (i=0; i<10; i++)
+          for (j=0; j<1000; j++)
             a[i] += i * v[j];
       \end{lstlisting}
     }
 
-    \column[t]{0.6\textwidth}{
+    \column[t]{0.63\textwidth}{
       \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
         float a[10], v[1000];
 
         // Let's assume 16floats/linecache
-        for(jj=0; jj<1000; jj+=16)
-          for(i=0; i<10; i++)
-            for(j=jj; j<min(jj+16,1000); j++)
+        for (jj=0; jj<1000; jj+=16)
+          for (i=0; i<10; i++)
+            for (j=jj; j<min(jj+16,1000); j++)
               a[i] += i * v[j];
       \end{lstlisting}
     }
@@ -968,14 +966,14 @@
           return sqrt(a) + sin(a);
         }
 
-        for (i=0; i<1N; i++)
+        for (i=0; i<N; i++)
           x = x + func(i);
       \end{lstlisting}
     }
 
     \column[t]{0.45\textwidth}{
       \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
-        for (i=0; i<1N; i++)
+        for (i=0; i<N; i++)
           x = x + sqrt(i) + sin(i);
       \end{lstlisting}
     }
@@ -1113,13 +1111,16 @@
   \frametitle{Compiler optimization levels}
 
   In a nutshell: \hfil (each level includes the previous)
-  \begin{description}
+  \begin{description}[{\tt -Ofast}]
   \item[{\tt -O0}] [Default] No optimization. Reduces compilation time
     and make debugging produce the expected results.
-  \item[{\tt -O/-O1}] Optimize. Tries to reduce code size and execution
-    time, avoiding optimizations that take high compilation time.
-  \item[{\tt -O2}] Optimizes even more.
-  \item[{\tt -O3}] Optimizes yet more.
+  \item[{\tt -O/-O1}] Basic optimizations. Tries to reduce code size
+    and execution time, avoiding time-consuming opts.
+  \item[{\tt -O2}] Optimize further, enabling opts not involving
+    space-speed tradeoff. Common level for production binaries.
+  \item[{\tt -O3}] Optimizes yet more. Turns on opts that can greatly
+    increase code size. Due to this, sometimes is not faster than {\tt
+      -O2}.
   \item[{\tt -Ofast}] Enables {\tt -ffast-math}, optimizations that
     are not valid for all standard-compliant programs.
 
@@ -1130,14 +1131,14 @@
 
   $\rightarrow$ {\footnotesize Check specific options being enable/disable at
     each level for your compiler version with {\tt gcc -Q -O2
-      --help=optimizers} (or in the doc)}
+      --help=optimizers} (or in the \alert{doc})}
 }
 
 \frame{
   \frametitle{Compiling to debug and/or profile a code}
 
-  Compiling to debug, basically:
-  \begin{description}
+  Compiling to {\bf debug}, basically:
+  \begin{description}[{\tt -Og}]
   \item[{\tt -g}] Includes extra information to use by a debugger\\
     Typically used together with {\tt -O0} (no optimizations)
   \item[{\tt -Og}] Optimize debugging experience: enables
@@ -1156,12 +1157,12 @@
     \endgroup
   \end{description}
 
-  \pause
-
-  Compiling to profile (instrumentation options):
-  \begin{description}
+  \only<2>{
+  Compiling to {\bf profile} (instrumentation options):
+  \begin{description}[{\tt -pg}]
   \item[{\tt -pg}] Generate extra code to write profile information
-    for {\tt gprof}
+    for {\tt gprof}\footnote{{\bf Gprof}: performance analysis tool
+      for Unix applications, part of binutils \url{http://www.gnu.org/software/binutils}}
   \item[$\Rightarrow$] More fine tuning options in the doc
 
     \begingroup
@@ -1176,10 +1177,12 @@
     \leftskip0em
     \rightskip\leftskip
     \makebox[0pt][r]{\tiny \alert{gcc 6.4 doc $\rightarrow$}\hspace*{0.15cm}}{\scriptsize
-      \url{http://gcc.gnu.org/onlinedocs/gcc-6.4.0/gcc/Instrumentation-Options.html}}
+      \url{http://gcc.gnu.org/onlinedocs/gcc-6.4.0/gcc/Instrumentation-Options.html}}\\
+    ~
     \par
     \endgroup
   \end{description}
+  }
 }
 
 \begin{frame}[fragile]{Other interesting compiler options}
@@ -1198,7 +1201,7 @@
 \url{https://www.jjj.de/fxt/fxtbook.pdf}}\footnote<2>{Generating Mixed
 Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.com/240/generate-a-mixed-source-and-assembly-listing-using-gcc}}}}]
          # create assembler code:
-         c++ -S -fverbose-asm -g -O2 test.cc -o test.s
+         cc -S -fverbose-asm -g -O2 test.cc -o test.s
 
          # create asm interlaced with source lines:
          as -alhnd test.s > test.lst
@@ -1283,6 +1286,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
         a[i] = a[i] + b[i];
         __builtin_prefetch (&a[i+j], 1, 1);
         __builtin_prefetch (&b[i+j], 0, 1);
+
         /* … */
       }
     \end{lstlisting}
@@ -1358,7 +1362,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 
   \begin{columns}
     \column{0.45\textwidth}{
-      \begin{lstlisting}[style=c,gobble=8,caption={Sequential loop}]
+      \begin{lstlisting}[style=c,gobble=7,caption={Sequential loop}]
         float A[32], B[32], C[32];
 
         for (i=0; i<32; i++)
@@ -1367,7 +1371,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
       \end{lstlisting}
     } \
     \column{0.55\textwidth}{
-      \begin{lstlisting}[style=c,gobble=8,caption={Vectorized pseudocode}]
+      \begin{lstlisting}[style=c,gobble=7,caption={Vectorized pseudocode}]
         float A[32], B[32], C[32];
 
         for (i=0; i<32; i+=8)
@@ -1447,6 +1451,118 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{columns}
 \end{frame}
 
+\frame{
+  \frametitle{Vectorization: requirements and limitations}
+
+  \textcolor{green}{ Which kind of loops can be vectorized?}
+  \begin{itemize}
+  \item Countable loops: The number of iterations has to be known at run-time
+  \item The loop has to have single entry and exit points {\small (e.g. We cannot have a break statement inside the loop)}
+  \item Conditional statements are allowed in a loop if they can be replaced by masks
+  \item No function calls
+    \begin{itemize}
+    \item Except vectorizable math functions e.g. {\tt sin}, {\tt sqrt},\ldots
+    \end{itemize}
+  \item Loop to be vectorized must be innermost loop if nested
+  \end{itemize}
+}
+
+\begin{frame}[fragile]{Vectorization: requirements and limitations}
+
+  \textcolor{red}{Obstacles to vectorization}
+  \begin{itemize}
+  \item Non-contiguous memory access patterns
+  \item Loop-carried dependences\footnote{Data dependency: \url{https://en.wikipedia.org/wiki/Data_dependency}}
+    \begin{description}
+    \item[\underline{RAW} (Read After Write)] ~\\
+      \begin{minipage}{5cm}
+        \begin{lstlisting}[style=c,gobble=4,caption={\bf \textcolor{red}{The loop cannot be vectorized}}]
+          for (i=0; i<N; i++)
+            a[i] = a[i-1] + 1;
+        \end{lstlisting}
+      \end{minipage}
+
+      \vspace*{0.5cm}
+
+    \item[\underline{WAR} (Write after Read)] ~\\
+      \begin{columns}
+        \column{0.45\textwidth}{
+          \begin{lstlisting}[style=c,gobble=7,caption={\bf \textcolor{green}{It can be vectorized}}]
+            for (i=0; i<N; i++)
+              a[i] = a[i+1] + 1;
+          \end{lstlisting}
+        } \
+        \column{0.45\textwidth}{
+          \begin{lstlisting}[style=c,gobble=7,caption={\bf \textcolor{red}{It cannot be vectorized}}]
+            for(i=0; i<N; i++) {
+              a[i] = a[i+1] + 1;
+              b[i] = a[i] * 2;
+            }
+          \end{lstlisting}
+        }
+      \end{columns}
+    \end{description}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Vectorization: requirements and limitations}
+
+  \begin{description}
+  \item[\underline{WAW} (Write after Write)] ~\\
+    \begin{columns}
+      \column{0.45\textwidth}{
+        {\bf \textcolor{red}{In general it cannnot be vectorized}}\\
+      } \
+      \column{0.45\textwidth}{
+        {\bf \textcolor{green}{It can be vectorized} because it can be recognized by the compiler as a sum reduction}\\
+        \begin{lstlisting}[style=c,gobble=6]
+          for (i=0; i<N; i++)
+            sum = sum + a[i];
+        \end{lstlisting}
+      }
+    \end{columns}
+
+  \item[\underline{RAR} (Read after Read)] The loop can be vectorized
+  \end{description}
+\end{frame}
+
+\begin{frame}[fragile]{Favour autovectorization}
+
+  \begin{itemize}
+  \item Use (normally 32-bytes) aligned data structures
+    \begin{itemize}
+    \item There are special vector {\tt load} and {\tt store} instructions for unaligned data {\small (but they are much slower)}
+    \item Use a Structure of Arrays (SoA)
+      \begin{lstlisting}[style=c,gobble=2]
+        typedef struct {
+          double a[N];
+          double b[N];
+          double c[N];
+        } mysoa;
+      \end{lstlisting}
+    \item instead of an Array of Structures (AoS)
+      \begin{lstlisting}[style=c,gobble=2]
+        typedef struct {
+          double a,b,c;
+        } aos;
+
+        aos myaos[N];
+      \end{lstlisting}
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Favour autovectorization}
+
+  \begin{itemize}
+  \item Use data format of the minimum possible size {\small (e.g. floats instead of doubles, if possible)}
+  \item Don't mix different vectorizable data types in a loop, if possible {\small (e.g. floats and doubles)}
+  \item Use the {\tt restrict}~\footnote{\url{http://en.wikipedia.org/wiki/Restrict}} qualifier in the declaration of a pointer to assert there is not aliasing {\small (two pointers pointing to the same memory location)}
+  \end{itemize}
+
+\end{frame}
 
 \frame{
   \frametitle{GCC autovectorization compiler flags}
@@ -1498,22 +1614,20 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{itemize}
 }
 
-\frame{
-  \frametitle{Vectorization: requirements and limitations}
+% \frame{
+%   \frametitle{Vectorization: requirements and limitations}
 
-  \begin{itemize}
-  \item Countable loops
-  \item No backward loop-carried dependencies
-  \item No function calls
-    \begin{itemize}
-    \item Except vectorizable math functions e.g. sin, sqrt,\ldots
-    \end{itemize}
-  \item Straight-line code (only one control flow: no switch)
-  \item Loop to be vectorized must be innermost loop if nested
-  \end{itemize}
-}
-
-
+%   \begin{itemize}
+%   \item Countable loops
+%   \item No backward loop-carried dependencies
+%   \item No function calls
+%     \begin{itemize}
+%     \item Except vectorizable math functions e.g. sin, sqrt,\ldots
+%     \end{itemize}
+%   \item Straight-line code (only one control flow: no switch)
+%   \item Loop to be vectorized must be innermost loop if nested
+%   \end{itemize}
+% }
 
 
 
