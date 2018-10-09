@@ -29,10 +29,10 @@
 
 \end{frame}
 
-\begin{frame}{Contents: Lesson 3}
+\begin{frame}{Contents: Lessons 3 and 4}
   \setbeamertemplate{section in toc}[sections numbered]
   \setbeamertemplate{subsection in toc}[ball unnumbered]
-  \tableofcontents[sections={3}]
+  \tableofcontents[sections={3-4}]
 \end{frame}
 
 
@@ -64,7 +64,7 @@
   \end{itemize}
 }
 
-\subsection{Computer organization \& architecture: basics}
+\subsection{Computer architecture basics}
 
 \frame{
   \frametitle{Computer organization: CPU, Mem \& I/O}
@@ -199,7 +199,7 @@
   \end{figure}
 }
 
-\subsection{High performance computing (HPC): basics}
+\subsection{HPC basics}
 
 \frame{
   \frametitle{Forms of parallel computing}
@@ -229,7 +229,10 @@
   \item[MIMD] Multiple Instruction stream; Multiple Data stream
     \only<3>{
       \begin{description}
-      \item[\alert{\footnotesize (typically)} SPMD] Single Program; Multiple Data
+      \item[\alert{\footnotesize (typically)} SPMD model] Single Program; Multiple Data\\
+        \hspace*{-0.4cm} {\small $\Rightarrow$ every task executes the
+          same program}
+        \vspace*{-0.5cm}
       \end{description}
     }
   \end{description}
@@ -304,7 +307,7 @@
     \item Inter-node: (usually) harder programming
     \item Exploting the parallelism exposed:
       \begin{itemize}
-      \item Message passing libraries: MPI, zeroMQ
+      \item Message passing libraries: MPI, zeroMQ, nanomsg
       \item Data analytics frameworks (Big Data): Hadoop, Spark, Flink
       \end{itemize}
     \end{itemize}
@@ -482,7 +485,7 @@
     \includegraphics[width=.5\textwidth]{roofline_model_bandwith_ceilings}~
     \includegraphics[width=.5\textwidth]{roofline_model_in-core_ceilings}
     \includegraphics[width=.5\textwidth]{roofline_model_locality_walls}
-    \caption{By Giu.natale - Own work, CC BY-SA 4.0,
+    \vspace*{-0.2cm}\caption{By Giu.natale - Own work, CC BY-SA 4.0,
       \url{https://commons.wikimedia.org/w/index.php?curid=49593615}
       \url{https://commons.wikimedia.org/w/index.php?curid=49593667}
       \url{https://commons.wikimedia.org/w/index.php?curid=49593835}
@@ -534,16 +537,16 @@
 }
 
 \frame{
-  \frametitle{\insertsectionhead}
+  \frametitle{Main tools to create efficient software}
 
-  Main tools we'll use in this session:
+  Main tools we'll use during this course
   \begin{description}
   \item[Compiling] ~\\
     GNU Compilers: gcc, g++, gfortran
   \item[Debugging] ~\\
     gdb
   \item[Profiling and performance analysis] ~\\
-    gprof, valgrind
+    gprof, valgrind, perf, extrae+paraver
   \item[Performance characterization] ~\\
     Berkeley Lab's CS Roofline Toolkit
   \end{description}
@@ -695,7 +698,7 @@
   \begin{block}{Basic code optimization techniques}
   Can be applied by
   \begin{itemize}
-  \item programmer
+  \item programmer (at \emph{coding time})
   \item compiler (maybe)
   \end{itemize}
   \end{block}
@@ -711,13 +714,12 @@
   \item Use registers
   \item Memory data layout
     \begin{itemize}
-    \item Mem alignment
-    \item Aliasing
+    \item Mem alignment, Aliasing\ldots
     \end{itemize}
   \item Prefetching
   \item Interprocedural optimizations
   \item Profile-guided optimizations (PGO)
-  \item Vectorization
+  \item Vectorization (SIMD) and/or Parallelization (MIMD)
   \end{itemize}
 }
 
@@ -1134,6 +1136,28 @@
       --help=optimizers} (or in the \alert{doc})}
 }
 
+% Info about GCC's IPA:
+% https://kristerw.blogspot.com/2017/05/interprocedural-optimization-in-gcc.html
+\frame{
+  \frametitle{Interprocedural \underline{optimization} (IPO) / \underline{analysis} (IPA)}
+
+  \begin{itemize}
+  \item Collection of compiler techniques based on analyzing the
+    entire program
+    \begin{itemize}
+    \item[$\rightarrow$] other optimizations look at only a single function, or even a single block of code.
+    \end{itemize}
+
+  \item IPO seeks to reduce or eliminate duplicate calculations,
+    inefficient use of memory, and to simplify iterative sequences
+    such as loops.
+    \begin{itemize}
+    \item may re-order routines for better memory layout and locality
+    \item may perform dead code elimination, inlining, etc.
+    \end{itemize}
+  \end{itemize}
+}
+
 \frame{
   \frametitle{Compiling to debug and/or profile a code}
 
@@ -1194,11 +1218,11 @@
 
     \pause
 
-  \item Generate ASM code \emph{``easy to read''} (eg. to check
+  \item Generate ASM code \emph{``easy to read''} (e.g. to check
     vectorization)
         \begin{lstlisting}[style=shell,gobble=5,caption={From the book
-\emph{Algorithms for programmers}\footnote<2>{Algorithm for programmers:
-\url{https://www.jjj.de/fxt/fxtbook.pdf}}\footnote<2>{Generating Mixed
+\emph{Algorithms for programmers}\footnote<2>{Algorithms for programmers:
+\url{https://www.jjj.de/fxt}}\footnote<2>{Generating Mixed
 Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.com/240/generate-a-mixed-source-and-assembly-listing-using-gcc}}}}]
          # create assembler code:
          cc -S -fverbose-asm -g -O2 test.cc -o test.s
@@ -1348,7 +1372,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 }
 
 
-\subsection{Vectorization}
+\subsection{Auto-vectorization}
 
 \begin{frame}[fragile]{Vectorization}
 
@@ -1405,13 +1429,13 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
     \begin{columns}
       \column{0.33\textwidth}{
         {\bf AVX asm instruction}\\
-        \begin{lstlisting}[style=asm,gobble=9]
+        \begin{lstlisting}[style=asm,gobble=8]
           vmovaps ymm, m256
         \end{lstlisting}
       } \
       \column{0.77\textwidth}{
         {\bf Intrinsic function}\\
-        \begin{lstlisting}[style=c,gobble=9]
+        \begin{lstlisting}[style=c,gobble=8]
           __m256 _mm256_load_ps (float const *mem_addr)
           #include <immintrin.h>
         \end{lstlisting}
@@ -1421,9 +1445,9 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \item[] \hspace*{-0.7cm} \mbox{\scriptsize \alert{(doc)} Intrinsics Guide: \url{http://software.intel.com/sites/landingpage/IntrinsicsGuide}}\\[0.2cm]
   \item SIMD instructions typically require:
     \begin{itemize}
-    \item aligned data
-    \item no pointer aliasing\\
-      {\small (pointers are aliased if they can refer to same storage location)}
+    \item aligned data {\footnotesize (although there are slower {\tt
+          load} and {\tt store} operations for unaligned data)}
+    \item no pointer aliasing {\footnotesize (pointers are aliased if they can refer to same storage location)}
     \end{itemize}
   \end{itemize}
 
@@ -1534,7 +1558,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
     \begin{itemize}
     \item There are special vector {\tt load} and {\tt store} instructions for unaligned data {\small (but they are much slower)}
     \item Use a Structure of Arrays (SoA)
-      \begin{lstlisting}[style=c,gobble=2]
+      \begin{lstlisting}[style=c]
         typedef struct {
           double a[N];
           double b[N];
@@ -1542,7 +1566,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
         } mysoa;
       \end{lstlisting}
     \item instead of an Array of Structures (AoS)
-      \begin{lstlisting}[style=c,gobble=2]
+      \begin{lstlisting}[style=c]
         typedef struct {
           double a,b,c;
         } aos;
@@ -1603,6 +1627,10 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
     \begin{itemize}
     \item programmer asserts no loop-carried dependencies
     \end{itemize}
+  \item {\tt \#pragma omp simd [clause [,clause ]\ldots]}
+    \begin{itemize}
+    \item the loop can be transformed into a SIMD loop $\Rightarrow$ vectorized!
+    \end{itemize}
   \end{itemize}
 
   C keywords:
@@ -1630,8 +1658,28 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 % }
 
 
+\subsection{Auto-parallelization}
 
-\subsection{Profiling: Evaluate execution time and detect hot spots}
+% Autopar in gcc
+% Reference: https://gcc.gnu.org/wiki/AutoParInGCC
+% Reference: https://gcc.gnu.org/wiki/Graphite/Parallelization
+\frame{
+  \frametitle{Automatic Parallelization}
+
+  Two flags are needed:
+  \begin{description}
+  \item[\tt -floop-parallelize-all] Triggers the first compiler pass
+    to mark loops that can be parallel
+  \item[\tt -ftree-parallelize-loops=<nthreads>] Triggers the code
+    generation part with the desired multi-threading level
+    \begin{itemize}
+    \item[$\rightarrow$] implies {\tt -pthread}
+    \end{itemize}
+  \end{description}
+}
+
+
+\section{Profiling of applications}
 
 \frame{
   \frametitle{Profile first, optimize later}
@@ -1663,29 +1711,62 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
     \item how often each line of code executes
     \item what lines of code are actually executed
     \item how much computing time each section of code uses
+    \item load balancing and idle periods in parallel executions
     \end{itemize}
   \end{itemize}
+}
 
-  \begin{itemize}
-  \item 2 main approaches:
+\frame{
+  \frametitle{Types of profiling}
+
+  \begin{block}{Typical profiling tasks:}
+    \begin{itemize}
+    \item Time-based profiling (\emph{Wall time})
+    \item Memory profiling
+    \item Cache profiling
+    \item I/O profiling\ldots
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{block}{2 main approaches:}
     \begin{itemize}
     \item Instrumenting profiler
+      \begin{itemize}
+      \item automatic instrumentation
+        \begin{itemize}
+        \item at compiling/linking time or on the fly
+        \end{itemize}
+      \item user-guided instrumentation
+      \end{itemize}
     \item Sampling profiler
       \begin{itemize}
       \item hardware counters
       \item system information
       \end{itemize}
     \end{itemize}
-  \end{itemize}
+  \end{block}
 }
+
+
+
+\subsection{Execution time-based profiling: detecting bottlenecks/hot spots}
 
 \begin{frame}[fragile]{First approach: self-profiling!}
 
   \begin{itemize}
+  \item Naive way of measuring tasks' execution time:
+    \begin{itemize}
+    \item {\tt time} shell built-in command
+    \item {\tt time} utility (usually in {\tt /usr/bin/time})
+    \end{itemize}
+
+    \pause
+
   \item Insert explicit \emph{timestamps} in your code
     \begin{itemize}
-    \item DIY instrumentation
-    \item Most common approach when you're writing your own code
+    \item DIY instrumentation: useful when you're writing your own code
       \begin{itemize}
       \item you know the structure/flow $\Rightarrow$ where to measure
       \end{itemize}
@@ -1695,29 +1776,52 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 
   \item In C, I like the function {\tt gettimeofday()}
     \begin{itemize}
-    \item microseconds precision
+    \item wall-clock time with microseconds precision ({\it hardware
+        dependent})
     \end{itemize}
-
-    \begin{lstlisting}[style=c,gobble=4]
-      #include <sys/time.h>
-
-      int gettimeofday(struct timeval *tv, struct timezone *tz)
-   \end{lstlisting}
-
-    \begin{lstlisting}[style=c,gobble=4]
-      <sys/time.h>
-
-      struct timeval {
-          time_t      tv_sec;   /* seconds */
-          suseconds_t tv_usec;  /* microseconds */
-      };
-      struct timezone {
-          int tz_minuteswest;   /* minutes west of Greenwich */
-          int tz_dsttime;       /* type of DST correction */
-      };
-   \end{lstlisting}
   \end{itemize}
 
+  \vspace*{-0.35cm}
+  \begin{overprint}
+    \onslide<3>
+    \begin{lstlisting}[style=c,gobble=3]
+      #include <sys/time.h>
+
+      int gettimeofday(struct timeval *tv, struct timezone *tz);
+    \end{lstlisting}
+    \vspace*{-0.2cm}
+    \begin{lstlisting}[style=c,gobble=3]
+      struct timeval {
+        time_t      tv_sec;   /* seconds */
+        suseconds_t tv_usec;  /* microseconds */
+      };
+      struct timezone {
+        int tz_minuteswest;   /* minutes west of Greenwich */
+        int tz_dsttime;       /* type of DST correction */
+      };
+    \end{lstlisting}
+
+    \onslide<4>
+    \begin{itemize}
+    \item Other good options:
+      \begin{description}[{\tt clock\_gettime}]
+      \item[{\tt clock\_gettime}]
+      \item[{\tt clock}]
+      \item[{\tt time}]
+        \begin{itemize}
+        \item both from {\tt \#include <time.h>}
+        \item also wall-clock time\\[0.2cm]
+        \end{itemize}
+      \item[{\tt getrusage}]
+        \begin{itemize}
+        \item {\tt \#include <sys/time.h>}\\
+          {\tt \#include <sys/resource.h>}
+        \item \emph{user} and \emph{system} times separately
+        \end{itemize}
+
+      \end{description}
+    \end{itemize}
+  \end{overprint}
 \end{frame}
 
 \frame{
@@ -1836,8 +1940,9 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 \end{frame}
 
 \frame{
-  \frametitle{GPROF: some useful parameters}
+  \frametitle{GPROF: profiling options}
 
+  Some useful parameters:
   \begin{description}
   \item[{\tt -s}] combine the data from several runs to minimize
     statistical inaccuracy in measures
@@ -1849,7 +1954,8 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{description}
 }
 
-\begin{frame}[fragile]{Gprof and gprof2dot}
+\begin{frame}[fragile]{Obtaining a visual output: {\tt Gprof} and {\tt
+      gprof2dot}}
 
   \begin{block}{gprof2dot}
     Python script to convert output from many profilers into a dot graph
@@ -1900,11 +2006,13 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 }
 
 \frame{
-  \frametitle{Valgrind: a swiss army knife tool~\footnote{\url{http://valgrind.org}}}
+  \frametitle{Valgrind: a swiss army knife tool}
 
-  {\bf Valgrind:} instrumentation \underline{framework} for building
+  {\bf Valgrind~\footnote{\url{http://valgrind.org}}:} instrumentation \underline{framework} for building
   analysis tools
   \begin{itemize}
+  \item
+    Cross-platform~\footnote{\url{http://valgrind.org/info/platforms.html}}
   \item Typical use:
     \begin{itemize}
     \item debugging: detect memory management and threading bugs
@@ -1928,10 +2036,10 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   6 tools included in current versions:
   \begin{description}
   \item[Memcheck:] a memory error detector
-  \item[Callgrind:] a code profiler
+  \item[Callgrind:] a code profiler (callstack)
   \item[Cachegrind:] a cache and branch-prediction profiler
-  \item[Helgrind and DRD:] two different thread error detectors
   \item[Massif:] a heap profiler
+  \item[Helgrind and DRD:] two different thread error detectors
   \end{description}
 
   Also, 3 experimental tools:
@@ -1942,7 +2050,31 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{itemize}
 }
 
+\frame{
+  \frametitle{Valgrind: CLI interface and some GUIs}
 
+  \begin{itemize}
+  \item Valgrind tools are all \underline{CLI programs}
+  \item There are some \underline{GUI} available, though
+  \end{itemize}
+  \begin{description}[Eclipse integration]
+  \item[KCachegrind] -- a KDE visualisation tool for the profiling data
+    generated by calltree (Callgrind)
+  \item[Alleyoop] -- a Valgrind memory checker front-end for GNOME
+  \item[Massif-visualizer] -- a Tool for visualizing memory usage
+    recorded by Valgrind Massif
+  \item[Vakyrie] -- a Qt-based graphical front-end to the Valgrind
+    suite (currently only the Memcheck is supported)
+  \item[IDE integration] -- a GUI plugin for the integration of
+    several tools from Valgrind suite is provided in both {\tt
+      Eclipse} and {\tt KDevelop}:
+    \begin{itemize}
+    \item Memcheck
+    \item Massif
+    \item Cachegrind
+    \end{itemize}
+  \end{description}
+}
 
 \frame{
   \frametitle{Valgrind: performance profiling with Callgrind}
@@ -1954,7 +2086,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
       application
     \item[{\checkmark}] The profiling result is {\bf not} influenced by the
       measurement.
-    \item[{\tt x}] Again: terribly slow!
+    \item[{\tt x}] Main drawback: it is {\bf slow!} (Valgrind, in general)
     \end{itemize}
   \end{description}
 
@@ -1975,33 +2107,34 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 
 \begin{frame}[fragile]{Valgrind: Callgrind typical use}
 
-  How to use it?~\footnote{Windows binary (I dit not test it):
-    \url{http://sourceforge.net/projects/qcachegrindwin}}
+  How to use it?
   \begin{itemize}
   \item Compile your code with {\tt -g} (debugging symbols
     $\Rightarrow$ line numbers)
-  \item Launch cachegrind:
+  \item Launch callgrind:
     \begin{lstlisting}
-      valgrind --tool=callgrind myprog arg1 arg2
+      valgrind --tool=callgrind myprog <args>
     \end{lstlisting}
     \begin{itemize}
     \item[$\rightarrow$] a {\tt callgrind.out.processid} file is
       generated
     \end{itemize}
-  \item Use {\tt kcachegrind} (GUI) or {\tt callgrind\_annotate} (CLI)
-    to analyze your profiling data:
+  \item Use {\tt kcachegrind} (GUI)~\footnote{Windows binary (I have
+      not tested it):
+      \url{http://sourceforge.net/projects/qcachegrindwin}} or {\tt
+      callgrind\_annotate} (CLI) to analyze your profiling data:
     \begin{lstlisting}
       kcachegrind callgrind.out.processid
     \end{lstlisting}
 
-    \begin{lstlisting}
-      cg_annotate [--auto=yes] callgrind.out.processid
+    \begin{lstlisting}[gobble=3]
+      callgrind_annotate [--auto=yes] callgrind.out.processid
     \end{lstlisting}
   \end{itemize}
 \end{frame}
 
 \frame{
-  \frametitle{Valgrind: Callgrind}
+  \frametitle{Valgrind: Callgrind profiling}
 
   Collected data:
   \begin{itemize}
@@ -2016,7 +2149,115 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{itemize}
 }
 
-\subsection{Evaluating memory usage}
+\frame{
+  \frametitle{Valgrind: Callgrind -- Kcachegrind output example}
+
+  \vspace*{-0.5cm}
+  \begin{figure}
+    \hspace*{-0.88cm}\includegraphics[height=.82\textheight]{kcachegrind}
+    \caption{Flat profile, Call graph and Callee map in Kcachegrind}
+  \end{figure}
+}
+
+\subsection{Cache profiling: analyzing locality and cache behavior}
+
+\begin{frame}[fragile]{Valgrind: cache performance profiling with Cachegrind}
+
+  \begin{description}
+  \item[Cachegrind:] a cache and branch-prediction profiler
+  \end{description}
+
+  How to use it?
+  \begin{itemize}
+  \item Compile your code with {\tt -g} (debugging symbols
+    $\Rightarrow$ line numbers)
+  \item Launch cachegrind:
+    \begin{lstlisting}
+      valgrind --tool=cachegrind myprog <args>
+    \end{lstlisting}
+    \begin{itemize}
+    \item[$\rightarrow$] a {\tt cachegrind.out.processid} file is
+      generated
+    \item<2>[$\rightarrow$] Optional parameter: {\tt
+        --branch-sim=yes}\\
+      Add info about branch (mis)prediction
+    \end{itemize}
+  \item Use {\tt cachegrind\_annotate} (CLI) or {\tt kcachegrind}
+    (GUI) to analyze your profiling data:
+    \begin{lstlisting}
+      kcachegrind callgrind.out.processid
+    \end{lstlisting}
+
+    \begin{lstlisting}
+      cg_annotate [--auto=yes] cachegrind.out.processid
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Valgrind: cachegrind output}
+
+  \begin{lstlisting}[style=valgrind,caption={Cachegrind
+      output: recap}]
+
+I   refs:   55,915,671,268
+I1  misses:          5,140
+LLi misses:          4,500
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+
+D   refs:   18,250,289,589  (14,026,926,013 rd + 4,223,363,576 wr)
+D1  misses:     75,849,077  (    61,737,517 rd +    14,111,560 wr)
+LLd misses:     24,401,720  (    12,382,283 rd +    12,019,437 wr)
+D1  miss rate:         0.4% (           0.4%   +           0.3% )
+LLd miss rate:         0.1% (           0.1%   +           0.3% )
+
+LL refs:        75,854,217  (    61,742,657 rd +    14,111,560 wr)
+LL misses:      24,406,220  (    12,386,783 rd +    12,019,437 wr)
+LL miss rate:          0.0% (           0.0%   +           0.3% )
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Valgrind: cachegrind output}
+
+  \begin{lstlisting}[style=valgrind,xleftmargin=-0.75cm,basicstyle=\tiny\ttfamily,caption={Cachegrind
+      output: annotated output}]
+
+% cg_annotate --auto=yes cachegrind.out.30363
+--------------------------------------------------------------------------------
+I1 cache:         32768 B, 64 B, 8-way associative
+D1 cache:         32768 B, 64 B, 8-way associative
+LL cache:         3145728 B, 64 B, 12-way associative
+
+[...]
+
+        Ir I1mr ILmr         Dr      D1mr    DLmr        Dw    D1mw   DLmw
+[...]
+11,770,984    0    0    554,288         0       0         0       0      0 for (int ii=begin, iTmp=0; ii<end; ++ii, ++iTmp)
+         .    .    .          .         .       .         .       .      . {
+24,854,584   11   11  5,192,632   560,752 512,730 4,915,488     302    201    tmp[iTmp].gid  = atoms->gid[ii];
+15,023,608    0    0  5,192,632   560,752 518,652 4,915,488       0      0    tmp[iTmp].type = atoms->iSpecies[ii];
+ 9,830,976    0    0  4,915,488   892,840 779,741 4,915,488     101      1    tmp[iTmp].rx =   atoms->r[ii][0];
+ 9,830,976    0    0  4,915,488   514,662 217,133 4,915,488     101    101    tmp[iTmp].ry =   atoms->r[ii][1];
+ 9,830,976   11   11  4,915,488   615,696 473,665 4,915,488     101    100    tmp[iTmp].rz =   atoms->r[ii][2];
+11,493,840    0    0  4,915,488   892,840 769,859 4,915,488     101    100    tmp[iTmp].px =   atoms->p[ii][0];
+ 9,830,976    0    0  4,915,488   514,662 229,502 4,915,488     101     99    tmp[iTmp].py =   atoms->p[ii][1];
+ 9,830,976    0    0  4,915,488   615,696 480,076 4,915,488     101      0    tmp[iTmp].pz =   atoms->p[ii][2];
+         .    .    .          .         .       .         .       .      . }
+   831,432    0    0          0         0       0   277,144       0      0 qsort(&tmp, nAtoms, sizeof(AtomMsg), sortAtomsById);
+10,385,264    0    0    554,288         0       0         0       0      0 for (int ii=begin, iTmp=0; ii<end; ++ii, ++iTmp)
+         .    .    .          .         .       .         .       .      . {
+10,108,120   11   11  5,192,632         0       0 4,915,488       0      0    atoms->gid[ii]   = tmp[iTmp].gid;
+10,939,552    0    0  5,192,632         0       0 4,915,488       0      0    atoms->iSpecies[ii] = tmp[iTmp].type;
+29,492,928    0    0  4,915,488         0       0 4,915,488       0      0    atoms->r[ii][0]  = tmp[iTmp].rx;
+ 9,830,976    1    1  4,915,488         0       0 4,915,488       0      0    atoms->r[ii][1]  = tmp[iTmp].ry;
+
+[...]
+\end{lstlisting}
+
+\end{frame}
+
+\subsection{Memory profiling: Evaluating memory usage}
 
 \begin{frame}[fragile]{Valgrind: detecting memory-related errors with
     Memcheck}
@@ -2025,7 +2266,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \item[Memcheck:] The default tool, and the most popular
     \begin{itemize}
     \item[\checkmark] Easy way to detect and locate memory bugs
-    \item[{\tt x}] Main drawback: it is {\bf slow!} (Valgrind, in general)
+    \item[{\tt x}] Again: terribly slow!
     \item[{\tt x}] Second main drawback: some false positives!
     \end{itemize}
   \end{description}
@@ -2039,7 +2280,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \item Maybe a good idea to limit compiler opts: {\tt -O0 or -O1}
   \item Launch detailed memory leak detector ({\tt --leak-check=yes}):
     \begin{lstlisting}
-      valgrind --leak-check=yes myprog arg1 arg2
+      valgrind --leak-check=yes myprog <args>
     \end{lstlisting}
   \item Read the (verbose) output!
   \end{itemize}
@@ -2053,7 +2294,7 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 
 \begin{frame}[fragile]{Valgrind: Memcheck example}
 
-  \begin{lstlisting}[gobble=2]
+  \begin{lstlisting}[style=c,gobble=1]
     #include <stdlib.h>
 
     void f(void) {
@@ -2127,12 +2368,137 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
   \end{itemize}
 }
 
-% \subsection{Evaluating cache usage and performance}
+\frame{
+  \frametitle{Valgrind + gdb}
+
+  \begin{block}{GDB, the GNU Project debugger}
+    allow us to see what is going on `inside' another program while
+    it executes -- or what another program was doing at the moment it
+    crashed.
+  \end{block}
+
+  \begin{itemize}
+  \item To use {\tt valgrind} with {\tt gdb}:
+    \begin{description}
+    \item[{\tt --vgdb=<no|yes|full>} [default: yes]] ~\\
+      Valgrind provides \emph{``gdbserver''} functionality, allowing
+      an external GNU GDB debugger to control and debug your program
+      when it runs on.
+    \item[{\tt --vgdb-error=<number>} [default: 999999999]] ~\\
+      Valgrind will wait for \emph{<number>} errors to be reported
+      before freezing the program and waiting for a GDB connection.
+    \end{description}
+  \end{itemize}
+}
+
+\begin{frame}[fragile]{Valgrind: Massif, a heap profiler}
+
+  \begin{quote}
+    Heap profiling can help you reduce the amount of memory your
+    program uses
+  \end{quote}
+
+  \pause
+
+  How to use it?
+  \begin{itemize}
+  \item Again: compile your code with {\tt -g}
+  \item Launch massif to gather heap profiling information:
+    \begin{lstlisting}
+      valgrind --tool=massif myprog <args>
+    \end{lstlisting}
+    \begin{itemize}
+    \item[$\rightarrow$] a {\tt massif.out.processid} file is
+      generated
+    \item<3>[$\rightarrow$] key parameter: {\tt --time-unit=<i|ms|B>} [default: i]]\\
+      The time unit used for the profiling:
+      \begin{description}
+      \item[i] instructions executed, good for most cases
+      \item[ms] real (wallclock) time
+      \item[B] bytes allocated/deallocated, useful for very short-run
+        programs and testing purposes
+      \end{description}
+    \end{itemize}
+  \item Use {\tt ms\_print} (CLI) to see the information gathered by
+    Massif in an easy-to-read form (or {\tt massive\_visualizer} (GUI)
+    \begin{lstlisting}
+      ms_print massif.out.processid
+    \end{lstlisting}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Valgrind: massif output}
+
+  \begin{lstlisting}[style=valgrind,xleftmargin=-0.75cm,basicstyle=\scriptsize\ttfamily,] 
+   MB
+3.952^                                                                    #
+     |                                                                   @#:
+     |                                                                 :@@#:
+     |                                                            @@::::@@#:
+     |                                                            @ :: :@@#::
+     |                                                          @@@ :: :@@#::
+     |                                                       @@:@@@ :: :@@#::
+     |                                                    :::@ :@@@ :: :@@#::
+     |                                                    : :@ :@@@ :: :@@#::
+     |                                                  :@: :@ :@@@ :: :@@#::
+     |                                                @@:@: :@ :@@@ :: :@@#:::
+     |                           :       ::         ::@@:@: :@ :@@@ :: :@@#:::
+     |                        :@@:    ::::: ::::@@@:::@@:@: :@ :@@@ :: :@@#:::
+     |                     ::::@@:  ::: ::::::: @  :::@@:@: :@ :@@@ :: :@@#:::
+     |                    @: ::@@:  ::: ::::::: @  :::@@:@: :@ :@@@ :: :@@#:::
+     |                    @: ::@@:  ::: ::::::: @  :::@@:@: :@ :@@@ :: :@@#:::
+     |                    @: ::@@:::::: ::::::: @  :::@@:@: :@ :@@@ :: :@@#:::
+     |                ::@@@: ::@@:: ::: ::::::: @  :::@@:@: :@ :@@@ :: :@@#:::
+     |             :::::@ @: ::@@:: ::: ::::::: @  :::@@:@: :@ :@@@ :: :@@#:::
+     |           @@:::::@ @: ::@@:: ::: ::::::: @  :::@@:@: :@ :@@@ :: :@@#:::
+   0 +----------------------------------------------------------------------->Mi
+     0                                                                   626.4
+ Number of snapshots: 63
+ Detailed snapshots: [3, 4, 10, 11, 15, 16, 29, 33, 34, 36, 39, 41,
+                      42, 43, 44, 49, 50, 51, 53, 55, 56, 57 (peak)]
+  \end{lstlisting}
+\end{frame}
 
 
-% \subsection{Strategies to detect vectorization and parallelization
-%   opportunities}
+\subsection{Profiling with {\tt perf}}
 
+\frame{
+  \frametitle{\insertsubsectionhead}
+
+  \begin{block}{Perf}
+    Linux profiling with performance counters
+
+    \begin{itemize}
+    \item Use of {\bf performance counters}~\footnote{CPU hardware
+        registers that count hardware events such as instructions
+        executed, cache-misses suffered, or branches mispredicted} to
+      trace dynamic control flow and identify hotspots
+    \item Use of {\bf tracepoints}~\footnote{Instrumentation points
+        placed at logical locations in code, such as for system calls,
+        TCP/IP events, file system operations, etc.} to collect useful
+      information about the running processl, including timestamps and
+      stack traces.
+    \end{itemize}
+  \end{block}
+}
+
+\frame{
+  \frametitle{Perf interface}
+
+  Simple to use CLI:
+  \begin{description}[perf annotate:]
+  \item[perf stat:] obtain event counts
+  \item[perf record:] record events for later reporting
+  \item[perf report:] break down events by process, function, etc.
+  \item[perf annotate:] annotate assembly or source code with event
+    counts
+  \item[perf top:] see live event count
+  \item[perf bench:] run different kernel microbenchmarks
+  \end{description}
+
+  $\Rightarrow$Good documentation: \url{https://perf.wiki.kernel.org}
+}
 
 
 \section{Optimization and Profiling of Parallel Code}
