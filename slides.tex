@@ -2506,7 +2506,7 @@ LL cache:         3145728 B, 64 B, 12-way associative
 \subsection{Paraver et al: an overview}
 
 \frame{
-  \frametitle{\insertsectionhead}
+  \frametitle{Paraver et al: an overview of BSC Performance Tools}
   % \item ompP
   \begin{block}{Leveraging BSC's HPC Performance
       Tools~\footnote{Barcelona Supercomputing Center Performance
@@ -2531,9 +2531,13 @@ LL cache:         3145728 B, 64 B, 12-way associative
   \frametitle{BSC's performance analysis tools}
 
   Let's embrace again this \underline{core idea} (from a previous slide):
-  \begin{quote}
-    Profile first, optimize later
-  \end{quote}
+
+  \begin{block}{}
+    \begin{quotation}
+      Profile first, optimize later
+    \end{quotation}
+  \end{block}
+
   \begin{itemize}
   \item Analysis must be the first step towards the optimization of an
     application
@@ -2551,6 +2555,10 @@ LL cache:         3145728 B, 64 B, 12-way associative
     \end{itemize}
   \end{block}
 }
+
+
+\subsection{Dynamic instrumentation to trace programs with {\tt
+    extrae}}
 
 \frame{
   \frametitle{Extrae}
@@ -2580,7 +2588,7 @@ LL cache:         3145728 B, 64 B, 12-way associative
     \begin{itemize}
     \item Intel, Cray, BlueGene, MIC, ARM, Android,\\ Fujitsu Spark\ldots
     \end{itemize}
-  \item Performance Counters
+  \item Hardware Performance Counters
     \begin{itemize}
     \item Using PAPI interface
     \end{itemize}
@@ -2658,12 +2666,18 @@ LL cache:         3145728 B, 64 B, 12-way associative
   \item Adapt the job submission script
   \item \structure{[optional]} Tune the Extrae XML configuration file
     \begin{itemize}
-    \item~\mbox{Examples distributed with Extrae: {\footnotesize \tt
-          \$EXTRAE\_HOME/share/example}~\footnote{In Finisterrae
-          II:\\~~~{\scriptsize EXTRAE\_HOME=/opt/cesga/easybuild-cesga/software/MPI/gcc/6.4.0/openmpi/2.1.1/extrae/3.5.2}}}
+    \item Examples distributed with Extrae:\\
+      \hfill {\footnotesize \tt \$\{EXTRAE\_HOME\}/share/example}~\footnote{In
+        Finisterrae II:\\~~~{\scriptsize
+          EXTRAE\_HOME=/opt/cesga/easybuild-cesga/software/MPI/gcc/6.4.0/openmpi/2.1.1/extrae/3.5.2}}
     \end{itemize}
-  \item Run the job to generate the trace
+  \item Submit/Run the job to generate the trace
   \end{enumerate}
+
+  \pause
+
+  All details in Extrae official documentation:
+  {\small \url{https://tools.bsc.es/sites/default/files/documentation/pdf/extrae-3.5.2-user-guide.pdf}}
 }
 
 \begin{frame}[fragile]{Extrae: submission script}
@@ -2677,7 +2691,7 @@ LL cache:         3145728 B, 64 B, 12-way associative
     ##SBATCH -N 16  #nodes
     #SBATCH -p cola-corta
 
-    @module load extrae/3.5.2
+    @module load gcc/6.4.0 openmpi/2.1.1 extrae/3.5.2
     # export TRACE_NAME=trace_filename.prv # *OP*
     @
     srun -n 16 @${HOME}/trace.sh@ parallel_binary [params]
@@ -2721,13 +2735,41 @@ LL cache:         3145728 B, 64 B, 12-way associative
 \frame{
   \frametitle{Extrae: XML configuration}
 
-  See examples in {\tt \${EXTRAE\_HOME}/example/LINUX}
+  See examples in {\tt \$\{EXTRAE\_HOME\}/share/example}
 
   For example:
   \begin{itemize}
   \item for MPI + OpenMP:\\
-    {\tt \${EXTRAE\_HOME}/example/LINUX/MPI+OMP/extrae.xml}
+    {\tt \$\{EXTRAE\_HOME\}/share/example/MPI+OMP/extrae.xml}
+  \item only MPI:\\
+    {\tt \$\{EXTRAE\_HOME\}/share/example/MPI/extrae.xml}
+  \item only OpenMP:\\
+    {\tt \$\{EXTRAE\_HOME\}/share/example/OMP/extrae.xml}
   \end{itemize}
+}
+
+\frame{
+  \frametitle{Extrae: XML configuration, easy to customize (i)}
+
+  \begin{figure}
+    \hspace*{-0.5cm}\includegraphics[width=1.1\textwidth]{extraexml1}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Extrae: XML configuration, easy to customize (ii)}
+
+  \begin{figure}
+    \hspace*{-.8cm}\includegraphics[width=1.15\textwidth]{extraexml2}
+  \end{figure}
+}
+
+\frame{
+  \frametitle{Extrae: XML configuration, easy to customize (iii)}
+
+  \begin{figure}
+    \hspace*{-0.5cm}\includegraphics[width=1.1\textwidth]{extraexml3}
+  \end{figure}
 }
 
 \begin{frame}[fragile]{Extrae: job sumission and trace files}
@@ -2744,6 +2786,8 @@ LL cache:         3145728 B, 64 B, 12-way associative
     \end{lstlisting}
   \end{enumerate}
 \end{frame}
+
+\subsection{Performance analysis with {\tt paraver}}
 
 \frame{
   \frametitle{Paraver}
@@ -2786,15 +2830,17 @@ LL cache:         3145728 B, 64 B, 12-way associative
   Two main displays to provide performance information:
   \begin{description}
   \item[Timeline:]
-    Represents behavior of application along time and processes
+    Behavior of application along time and processes
     \begin{figure}
       \includegraphics[width=0.7\textwidth]{paravertimeline}
     \end{figure}
 
     \pause
 
-  \item[Statistics:] {\small (\emph{aka} \underline{Profile window})}
-    Numerical analysis of the data
+  \item[Tables:] Numerical analysis of the data
+    \begin{itemize}
+    \item Profiles, histograms, correlations
+    \end{itemize}
     \begin{figure}
       \hspace*{-0.5cm}\includegraphics[width=0.4\textwidth]{paraverhistogram}
       \includegraphics[width=0.43\textwidth]{paraverdata}
@@ -2802,50 +2848,78 @@ LL cache:         3145728 B, 64 B, 12-way associative
   \end{description}
 }
 
-% \subsection{Shared memory (OpenMP)}
+\frame{
+  \frametitle{Paraver, a performance data browser}
 
-% \frame{
-% }
+  \begin{figure}
+    \includegraphics[width=\textwidth]{paraverworkflow}
+  \end{figure}
+}
 
-% \subsubsection{Load balancing optimization}
+\frame{
+  \frametitle{Paraver: Profiles, histograms, correlations}
 
-% \frame{
-% }
+  \begin{figure}
+    \hspace*{-0.5cm}\includegraphics[width=1.1\textwidth]{paravercor}
+  \end{figure}
+}
 
-% \subsubsection{Communication analysis and optimization}
+\frame{
+  \frametitle{Paraver: Analyzing variability through histograms and timelines}
 
-% \frame{
-% }
+  Key idea in {\tt paraver}: {\bf Gradient}
 
-% \subsection{Distributed memory (MPI)}
+  \vspace*{-0.3cm}
+  \begin{figure}
+    \hspace*{-0.5cm}\includegraphics[width=1.1\textwidth]{paraveranal}
+  \end{figure}
+}
 
-% \frame{
-% }
+\frame{
+  \frametitle{Paraver: Improvement after detecting imbalances}
 
-% \subsubsection{Load balancing optimization}
+  After some months of hard work\ldots\footnote{Real experience from a
+    BSC experiment}
 
-% \frame{
-% }
+  \begin{figure}
+    \hspace*{-0.8cm}\includegraphics[width=1.15\textwidth]{paraverimprove}
+  \end{figure}
+}
 
-% \subsubsection{Communication analysis and optimization}
+\frame{
+  \frametitle{Paraver: From tables to timelines}
 
-% \frame{
-% }
+  Where in the timeline do the values in certain table columns appear?
+  \vspace*{-0.5cm}
+  \begin{itemize}
+  \item for example, I want to see the time distribution of a given routine
+  \end{itemize}
+  \vspace*{-0.2cm}
+  \begin{figure}
+    \hspace*{-0.8cm}\includegraphics[width=1.15\textwidth]{paravertables}
+  \end{figure}
+}
 
-% \subsection{Hybrid parallel programming: shared + distributed Mem}
+\begin{frame}[fragile]{Install {\tt paraver} in your computer}
+  \begin{itemize}
+  \item Download {\tt paraver} from the official site:\\
+    \hfil \url{https://tools.bsc.es/downloads}
+  \item Download the tutorials and uncompress them into the {\tt
+      paraver} directory:\\
+    \hfil \url{https://tools.bsc.es/paraver-tutorials}
+  \item Launch paraver. For example: (use your installation path)
+    \begin{lstlisting}[style=shell,gobble=3]
+      /opt/wxparaver-4.7.2-Linux_x86_64/bin/wxparaver
+    \end{lstlisting}
+  \item Check the tutorials: {\small (also available in pdf and html)}\\
+    \hfil Help$\rightarrow$Tutorials
+  \end{itemize}
+\end{frame}
 
-% \frame{
-% }
+%\section{Parametric analysis of behaviour with {\tt dimemas}}
 
-% \subsubsection{Load balancing optimization}
-
-% \frame{
-% }
-
-% \subsubsection{Communication analysis and optimization}
-
-% \frame{
-% }
+%\begin{frame}
+%\end{frame}
 
 \appendix
 

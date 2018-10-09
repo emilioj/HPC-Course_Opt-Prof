@@ -1,0 +1,1342 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg903"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="extraexml2.svg">
+  <defs
+     id="defs897" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4464455"
+     inkscape:cx="638.57143"
+     inkscape:cy="372.85714"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1916"
+     inkscape:window-height="1056"
+     inkscape:window-x="0"
+     inkscape:window-y="20"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata900">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-87)">
+    <path
+       d="M 41.547142,246.39427 H 255.54214 V 128.37953 H 41.547142 Z"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       id="path230"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       y="136.35689"
+       x="44.61948"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text234">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="44.61948"
+         y="136.35689"
+         id="tspan232">&lt;</tspan>
+    </text>
+    <text
+       y="136.35689"
+       x="46.736149"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text238">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="46.736149 48.852818 50.969486 53.086155 55.202824 57.319492 59.436161 61.55283"
+         y="136.35689"
+         sodipodi:role="line"
+         id="tspan236">counters</tspan>
+    </text>
+    <text
+       y="136.35689"
+       x="65.786163"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text242">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="65.786163 67.902802 70.01947 72.136139 74.252808 76.369476 78.486145"
+         y="136.35689"
+         sodipodi:role="line"
+         id="tspan240">enabled</tspan>
+    </text>
+    <text
+       y="136.35689"
+       x="80.609863"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text246">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="80.609863 82.726532 84.843201 86.959869 89.076538 91.193207 93.309875"
+         y="136.35689"
+         sodipodi:role="line"
+         id="tspan244">=&quot;yes&quot;&gt;</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="48.852818"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text250">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="48.852818"
+         y="140.59023"
+         id="tspan248">&lt;</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="50.969486"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text254">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="50.969486 53.086155 55.202824"
+         y="140.59023"
+         sodipodi:role="line"
+         id="tspan252">cpu</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="59.436161"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text258">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="59.436161 61.55283 63.669498 65.786163 67.902802 70.01947 72.136139"
+         y="140.59023"
+         sodipodi:role="line"
+         id="tspan256">enabled</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="74.259857"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text262">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="74.259857 76.376526 78.493195 80.609863 82.726532 84.843201 86.959869"
+         y="140.59023"
+         sodipodi:role="line"
+         id="tspan260">=&quot;yes&quot;</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="89.076538"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text266">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="89.076538 91.193207 93.309875 95.426544 97.543213 99.659882 101.77652 103.89319"
+         y="140.59023"
+         sodipodi:role="line"
+         id="tspan264">starting</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="106.00986"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text270">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="106.00986"
+         y="140.59023"
+         id="tspan268">-</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="108.12653"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text274">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="108.12653 110.24319 112.35986"
+         y="140.59023"
+         sodipodi:role="line"
+         id="tspan272">set</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="114.47653"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text278">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="114.47653"
+         y="140.59023"
+         id="tspan276">-</tspan>
+    </text>
+    <text
+       y="140.59023"
+       x="116.5932"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text282">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="116.5932 118.70987 120.82654 122.94321 125.05988 127.17654 129.29321 131.40988 133.52655 135.64322 137.75986 139.87656"
+         y="140.59023"
+         sodipodi:role="line"
+         id="tspan280">distribution</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text290">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan288">&lt;set</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="63.669498"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text294">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan292">enabled</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="78.493195"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text298">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="78.493195 80.609863 82.726532 84.843201 86.959869 89.076538 91.193207"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan296">=&quot;yes&quot;</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="93.309875"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text302">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="93.309875 95.426544 97.543213 99.659882 101.77652 103.89319"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan300">domain</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="106.00986"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text306">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="106.00986 108.12653"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan304">=&quot;</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="110.24319"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text310">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="110.24319 112.35986 114.47653"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan308">all</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="116.5932"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text314">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="116.5932 118.70987"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan312">&quot;</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="120.83713"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text318">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="120.83713 122.9538 125.07043 127.1871 129.30377 131.42044 133.53711 135.65378"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan316">changeat</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="137.77045"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text322">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="137.77045"
+         y="144.82355"
+         id="tspan320">-</tspan>
+    </text>
+    <text
+       y="144.82355"
+       x="139.88712"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text326">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="139.88712 142.00378 144.12045 146.23712 148.35379 150.47046 152.5871 154.7038 156.82043 158.9371 161.05377 163.17044 165.28711 167.40378 169.52045 171.63712"
+         y="144.82355"
+         sodipodi:role="line"
+         id="tspan324">time=&quot;500000us&quot;&gt;</tspan>
+    </text>
+    <text
+       y="149.05688"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text330">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283 63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476 78.486145 80.602814 82.719482 84.836151 86.95282 89.069489 91.186157 93.302826 95.419495 97.536163 99.652832 101.76947 103.88614 106.00281 108.11948 110.23615 112.35281 114.46948 116.58615 118.70282 120.81949 122.93616 125.05283 127.16949 129.28616 131.4028 133.51947 135.63614 137.75281 139.86948 141.98615 144.10281 146.21948 148.33615 150.45282 152.56949 154.68613 156.80283 158.91949 161.03616 163.1528 165.26947 167.38614 169.50281"
+         y="149.05688"
+         sodipodi:role="line"
+         id="tspan328">PAPI_TOT_INS, PAPI_TOT_CYC, PAPI_L1_DCM, PAPI_L3_TCM,</tspan>
+    </text>
+    <text
+       y="153.29022"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text334">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283 63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476 78.486145 80.602814 82.719482 84.836151 86.95282 89.069489 91.186157 93.302826 95.419495 97.536163 99.652832 101.76947 103.88614 106.00281 108.11948 110.23615 112.35281 114.46948 116.58615 118.70282 120.81949 122.93616 125.05283 127.16949 129.28616 131.4028"
+         y="153.29022"
+         sodipodi:role="line"
+         id="tspan332">PAPI_BR_CN, PAPI_VEC_SP, PAPI_VEC_DP</tspan>
+    </text>
+    <text
+       y="157.52356"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#6395d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text338">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283 63.669498"
+         y="157.52356"
+         sodipodi:role="line"
+         id="tspan336">&lt;/set&gt;</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text342">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan340">&lt;set</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="63.669498"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text346">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan344">enabled</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="78.493195"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text350">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="78.493195 80.609863 82.726532 84.843201 86.959869 89.076538 91.193207"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan348">=&quot;yes&quot;</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="93.309875"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text354">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="93.309875 95.426544 97.543213 99.659882 101.77652 103.89319"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan352">domain</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="106.00986"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text358">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="106.00986 108.12653"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan356">=&quot;</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="110.24319"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text362">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="110.24319 112.35986 114.47653"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan360">all</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="116.5932"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text366">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="116.5932 118.70987"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan364">&quot;</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="120.83713"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text370">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="120.83713 122.9538 125.07043 127.1871 129.30377 131.42044 133.53711 135.65378"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan368">changeat</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="137.77045"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text374">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="137.77045"
+         y="161.7569"
+         id="tspan372">-</tspan>
+    </text>
+    <text
+       y="161.7569"
+       x="139.88712"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text378">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="139.88712 142.00378 144.12045 146.23712 148.35379 150.47046 152.5871 154.7038 156.82043 158.9371 161.05377 163.17044 165.28711 167.40378 169.52045 171.63712"
+         y="161.7569"
+         sodipodi:role="line"
+         id="tspan376">time=&quot;500000us&quot;&gt;</tspan>
+    </text>
+    <text
+       y="165.99023"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text382">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283 63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476 78.486145 80.602814 82.719482 84.836151 86.95282 89.069489 91.186157 93.302826 95.419495 97.536163 99.652832 101.76947 103.88614 106.00281 108.11948 110.23615 112.35281 114.46948 116.58615 118.70282 120.81949 122.93616 125.05283 127.16949 129.28616 131.4028 133.51947 135.63614 137.75281 139.86948 141.98615 144.10281 146.21948 148.33615 150.45282 152.56949 154.68613 156.80283 158.91949 161.03616 163.1528 165.26947 167.38614 169.50281"
+         y="165.99023"
+         sodipodi:role="line"
+         id="tspan380">PAPI_TOT_INS, PAPI_TOT_CYC, PAPI_BR_UCN, PAPI_BR_MSP,</tspan>
+    </text>
+    <text
+       y="170.23415"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text386">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283 63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476 78.486145 80.602814 82.719482 84.836151 86.95282 89.069489 91.186157 93.302826 95.419495 97.536163 99.652832 101.76947 103.88614 106.00281 108.11948"
+         y="170.23415"
+         sodipodi:role="line"
+         id="tspan384">PAPI_SR_INS, PAPI_LD_INS</tspan>
+    </text>
+    <text
+       y="174.46748"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text390">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824"
+         y="174.46748"
+         sodipodi:role="line"
+         id="tspan388">&lt;/</tspan>
+    </text>
+    <text
+       y="174.46748"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#c00000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text394">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283 63.669498"
+         y="174.46748"
+         sodipodi:role="line"
+         id="tspan392">set&gt;</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text398">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan396">&lt;set</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="63.669498"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text402">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan400">enabled</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="78.493195"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text406">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="78.493195 80.609863 82.726532 84.843201 86.959869 89.076538 91.193207"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan404">=&quot;yes&quot;</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="93.309875"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text410">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="93.309875 95.426544 97.543213 99.659882 101.77652 103.89319"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan408">domain</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="106.00986"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text414">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="106.00986 108.12653"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan412">=&quot;</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="110.24319"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text418">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="110.24319 112.35986 114.47653"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan416">all</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="116.5932"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text422">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="116.5932 118.70987"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan420">&quot;</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="120.83713"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text426">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="120.83713 122.9538 125.07043 127.1871 129.30377 131.42044 133.53711 135.65378"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan424">changeat</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="137.77045"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text430">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="137.77045"
+         y="178.70081"
+         id="tspan428">-</tspan>
+    </text>
+    <text
+       y="178.70081"
+       x="139.88712"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text434">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="139.88712 142.00378 144.12045 146.23712 148.35379 150.47046 152.5871 154.7038 156.82043 158.9371 161.05377 163.17044 165.28711 167.40378 169.52045 171.63712"
+         y="178.70081"
+         sodipodi:role="line"
+         id="tspan432">time=&quot;500000us&quot;&gt;</tspan>
+    </text>
+    <text
+       y="182.93414"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text438">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283 63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476 78.486145 80.602814 82.719482 84.836151 86.95282 89.069489 91.186157 93.302826 95.419495 97.536163 99.652832 101.76947 103.88614 106.00281 108.11948 110.23615 112.35281 114.46948 116.58615 118.70282 120.81949 122.93616 125.05283 127.16949 129.28616 131.4028 133.51947 135.63614 137.75281 139.86948 141.98615 144.10281 146.21948 148.33615 150.45282 152.56949 154.68613 156.80283 158.91949 161.03616 163.1528 165.26947 167.38614"
+         y="182.93414"
+         sodipodi:role="line"
+         id="tspan436">PAPI_TOT_INS, PAPI_TOT_CYC, PAPI_L2_DCM, PAPI_FP_INS,</tspan>
+    </text>
+    <text
+       y="187.16748"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text442">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283 63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476 78.486145 80.602814 82.719482 84.836151 86.95282"
+         y="187.16748"
+         sodipodi:role="line"
+         id="tspan440">RESOURCE_STALLS</tspan>
+    </text>
+    <text
+       y="191.4008"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#ffc000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text446">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283 63.669498"
+         y="191.4008"
+         sodipodi:role="line"
+         id="tspan444">&lt;/set&gt;</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text450">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan448">&lt;set</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="63.669498"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text454">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan452">enabled</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="78.493195"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text458">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="78.493195 80.609863 82.726532 84.843201 86.959869 89.076538 91.193207"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan456">=&quot;yes&quot;</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="93.309875"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text462">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="93.309875 95.426544 97.543213 99.659882 101.77652 103.89319"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan460">domain</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="106.00986"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text466">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="106.00986 108.12653"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan464">=&quot;</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="110.24319"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text470">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="110.24319 112.35986 114.47653"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan468">all</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="116.5932"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text474">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="116.5932 118.70987"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan472">&quot;</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="120.83713"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text478">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="120.83713 122.9538 125.07043 127.1871 129.30377 131.42044 133.53711 135.65378"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan476">changeat</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="137.77045"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text482">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="137.77045"
+         y="195.63414"
+         id="tspan480">-</tspan>
+    </text>
+    <text
+       y="195.63414"
+       x="139.88712"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text486">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="139.88712 142.00378 144.12045 146.23712 148.35379 150.47046 152.5871 154.7038 156.82043 158.9371 161.05377 163.17044 165.28711 167.40378 169.52045 171.63712"
+         y="195.63414"
+         sodipodi:role="line"
+         id="tspan484">time=&quot;500000us&quot;&gt;</tspan>
+    </text>
+    <text
+       y="199.86749"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text490">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283"
+         y="199.86749"
+         sodipodi:role="line"
+         id="tspan488">...</tspan>
+    </text>
+    <text
+       y="204.10786"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.52213335px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#00b050;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text494">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283 63.669498"
+         y="204.10786"
+         sodipodi:role="line"
+         id="tspan492">&lt;/set&gt;</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text498">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan496">&lt;set</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="63.669498"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text502">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="63.669498 65.786163 67.902802 70.01947 72.136139 74.252808 76.369476"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan500">enabled</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="78.493195"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text506">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="78.493195 80.609863 82.726532 84.843201 86.959869 89.076538 91.193207"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan504">=&quot;yes&quot;</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="93.309875"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text510">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="93.309875 95.426544 97.543213 99.659882 101.77652 103.89319"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan508">domain</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="106.00986"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text514">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="106.00986 108.12653"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan512">=&quot;</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="110.24319"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text518">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="110.24319 112.35986 114.47653"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan516">all</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="116.5932"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text522">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="116.5932 118.70987"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan520">&quot;</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="120.83713"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text526">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="120.83713 122.9538 125.07043 127.1871 129.30377 131.42044 133.53711 135.65378"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan524">changeat</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="137.77045"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text530">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="137.77045"
+         y="208.3412"
+         id="tspan528">-</tspan>
+    </text>
+    <text
+       y="208.3412"
+       x="139.88712"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text534">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="139.88712 142.00378 144.12045 146.23712 148.35379 150.47046 152.5871 154.7038 156.82043 158.9371 161.05377 163.17044 165.28711 167.40378 169.52045 171.63712"
+         y="208.3412"
+         sodipodi:role="line"
+         id="tspan532">time=&quot;500000us&quot;&gt;</tspan>
+    </text>
+    <text
+       y="212.57452"
+       x="57.319492"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text538">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="57.319492 59.436161 61.55283"
+         y="212.57452"
+         sodipodi:role="line"
+         id="tspan536">...</tspan>
+    </text>
+    <text
+       y="216.80786"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#7030a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text542">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492 59.436161 61.55283 63.669498"
+         y="216.80786"
+         sodipodi:role="line"
+         id="tspan540">&lt;/set&gt;</tspan>
+    </text>
+    <text
+       y="221.0412"
+       x="48.852818"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text546">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="48.852818 50.969486"
+         y="221.0412"
+         sodipodi:role="line"
+         id="tspan544">&lt;/</tspan>
+    </text>
+    <text
+       y="221.0412"
+       x="53.086155"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text550">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="53.086155 55.202824 57.319492"
+         y="221.0412"
+         sodipodi:role="line"
+         id="tspan548">cpu</tspan>
+    </text>
+    <text
+       y="221.0412"
+       x="59.436161"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text554">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="59.436161"
+         y="221.0412"
+         id="tspan552">&gt;</tspan>
+    </text>
+    <text
+       y="225.27452"
+       x="48.852818"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text558">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="48.852818"
+         y="225.27452"
+         id="tspan556">&lt;</tspan>
+    </text>
+    <text
+       y="225.27452"
+       x="50.969486"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text562">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="50.969486 53.086155 55.202824 57.319492 59.436161 61.55283 63.669498"
+         y="225.27452"
+         sodipodi:role="line"
+         id="tspan560">network</tspan>
+    </text>
+    <text
+       y="225.27452"
+       x="67.902802"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text566">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="67.902802 70.01947 72.136139 74.252808 76.369476 78.486145 80.602814"
+         y="225.27452"
+         sodipodi:role="line"
+         id="tspan564">enabled</tspan>
+    </text>
+    <text
+       y="225.27452"
+       x="82.726532"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text570">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="82.726532 84.843201 86.959869 89.076538 91.193207 93.309875"
+         y="225.27452"
+         sodipodi:role="line"
+         id="tspan568">=&quot;no&quot;</tspan>
+    </text>
+    <text
+       y="225.27452"
+       x="95.426544"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text574">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="95.426544 97.543213"
+         y="225.27452"
+         sodipodi:role="line"
+         id="tspan572">/&gt;</tspan>
+    </text>
+    <text
+       y="229.50786"
+       x="48.852818"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text578">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="48.852818"
+         y="229.50786"
+         id="tspan576">&lt;</tspan>
+    </text>
+    <text
+       y="229.50786"
+       x="50.969486"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text582">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="50.969486 53.086155 55.202824 57.319492 59.436161 61.55283 63.669498 65.786163"
+         y="229.50786"
+         sodipodi:role="line"
+         id="tspan580">resource</tspan>
+    </text>
+    <text
+       y="229.50786"
+       x="67.902802"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text586">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="67.902802"
+         y="229.50786"
+         id="tspan584">-</tspan>
+    </text>
+    <text
+       y="229.50786"
+       x="70.02655"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text590">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="70.02655 72.143188 74.259857 76.376526 78.493195"
+         y="229.50786"
+         sodipodi:role="line"
+         id="tspan588">usage</tspan>
+    </text>
+    <text
+       y="229.50786"
+       x="82.726532"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text594">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="82.726532 84.843201 86.959869 89.076538 91.193207 93.309875 95.426544"
+         y="229.50786"
+         sodipodi:role="line"
+         id="tspan592">enabled</tspan>
+    </text>
+    <text
+       y="229.50786"
+       x="97.543213"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text598">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="97.543213 99.659882 101.77652 103.89319 106.00986 108.12653"
+         y="229.50786"
+         sodipodi:role="line"
+         id="tspan596">=&quot;no&quot;</tspan>
+    </text>
+    <text
+       y="229.50786"
+       x="110.24319"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text602">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="110.24319 112.35986"
+         y="229.50786"
+         sodipodi:role="line"
+         id="tspan600">/&gt;</tspan>
+    </text>
+    <text
+       y="233.7419"
+       x="48.852818"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text606">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="48.852818"
+         y="233.7419"
+         id="tspan604">&lt;</tspan>
+    </text>
+    <text
+       y="233.7419"
+       x="50.969486"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text610">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="50.969486 53.086155 55.202824 57.319492 59.436161 61.55283"
+         y="233.7419"
+         sodipodi:role="line"
+         id="tspan608">memory</tspan>
+    </text>
+    <text
+       y="233.7419"
+       x="63.669498"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text614">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="63.669498"
+         y="233.7419"
+         id="tspan612">-</tspan>
+    </text>
+    <text
+       y="233.7419"
+       x="65.786163"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text618">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="65.786163 67.902802 70.01947 72.136139 74.252808"
+         y="233.7419"
+         sodipodi:role="line"
+         id="tspan616">usage</tspan>
+    </text>
+    <text
+       y="233.7419"
+       x="78.493195"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text622">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="78.493195 80.609863 82.726532 84.843201 86.959869 89.076538 91.193207"
+         y="233.7419"
+         sodipodi:role="line"
+         id="tspan620">enabled</tspan>
+    </text>
+    <text
+       y="233.7419"
+       x="93.309875"
+       style="font-variant:normal;font-weight:normal;font-size:3.51366663px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text626">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="93.309875 95.426544 97.543213 99.659882 101.77652 103.89319 106.00986 108.12653"
+         y="233.7419"
+         sodipodi:role="line"
+         id="tspan624">=&quot;no&quot; /&gt;</tspan>
+    </text>
+    <text
+       y="237.9837"
+       x="44.61948"
+       style="font-variant:normal;font-weight:normal;font-size:3.52213335px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text630">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="44.61948 46.736149"
+         y="237.9837"
+         sodipodi:role="line"
+         id="tspan628">&lt;/</tspan>
+    </text>
+    <text
+       y="237.9837"
+       x="48.852818"
+       style="font-variant:normal;font-weight:normal;font-size:3.52213335px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text634">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="48.852818 50.969486 53.086155 55.202824 57.319492 59.436161 61.55283 63.669498"
+         y="237.9837"
+         sodipodi:role="line"
+         id="tspan632">counters</tspan>
+    </text>
+    <text
+       y="237.9837"
+       x="65.786163"
+       style="font-variant:normal;font-weight:normal;font-size:3.52213335px;font-family:Courier;-inkscape-font-specification:'Courier New';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text638">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="65.786163 67.902802"
+         y="237.9837"
+         sodipodi:role="line"
+         id="tspan636">&gt;</tspan>
+    </text>
+    <path
+       d="m 200.53314,192.38859 h 50.00625 v -36.0045 h -50.00625 z"
+       style="fill:#004990;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.35277775"
+       id="path640"
+       inkscape:connector-curvature="0" />
+    <text
+       y="168.90417"
+       x="203.50354"
+       style="font-variant:normal;font-weight:bold;font-size:6.3499999px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text644">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="203.50354 206.50708 209.72015 211.28229 214.49536 217.14966"
+         y="168.90417"
+         sodipodi:role="line"
+         id="tspan642">Select</tspan>
+    </text>
+    <text
+       y="168.90417"
+       x="220.69086"
+       style="font-variant:normal;font-weight:bold;font-size:6.3499999px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text648">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="220.69086 225.42163 228.85693 230.41907 233.07336"
+         y="168.90417"
+         sodipodi:role="line"
+         id="tspan646">which</tspan>
+    </text>
+    <text
+       y="168.90417"
+       x="237.83588"
+       style="font-variant:normal;font-weight:bold;font-size:6.3499999px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text652">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="237.83588 241.84271 247.60852"
+         y="168.90417"
+         sodipodi:role="line"
+         id="tspan650">HW</tspan>
+    </text>
+    <text
+       y="176.52417"
+       x="209.21851"
+       style="font-variant:normal;font-weight:bold;font-size:6.3499999px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text656">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="209.21851 211.84106 215.25739 218.69275 222.07727 224.19183 227.36682 229.52582"
+         y="176.52417"
+         sodipodi:role="line"
+         id="tspan654">counters</tspan>
+    </text>
+    <text
+       y="176.52417"
+       x="233.39087"
+       style="font-variant:normal;font-weight:bold;font-size:6.3499999px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text660">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="233.39087 236.52777 238.68042 241.89349"
+         y="176.52417"
+         sodipodi:role="line"
+         id="tspan658">are</tspan>
+    </text>
+    <text
+       y="184.15123"
+       x="212.43585"
+       style="font-variant:normal;font-weight:bold;font-size:6.3499999px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277775"
+       id="text664">
+      <tspan
+         style="stroke-width:0.35277775"
+         x="212.43585 217.59839 220.81152 223.94843 226.48206 229.90472 232.06372 235.27679"
+         y="184.15123"
+         sodipodi:role="line"
+         id="tspan662">measured</tspan>
+    </text>
+    <path
+       d="m 180.53064,138.38184 c 5.56684,0 10.07886,0 10.07886,0 v 36.67478 c 0,0 4.51556,0 10.08239,0 -5.56683,0 -10.08239,0 -10.08239,0 v 37.33446 c 0,0 -4.51202,0 -10.07886,0"
+       style="fill:none;stroke:#0058a9;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       id="path670"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
