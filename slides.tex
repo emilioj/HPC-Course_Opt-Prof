@@ -1886,6 +1886,8 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
     \end{itemize}
   \end{block}
 
+  \vspace*{-1cm}
+
   \begin{lstlisting}[gobble=3, caption={Flat profile example}]
     Each sample counts as 0.01 seconds.
       %   cumulative   self              self     total
@@ -1914,6 +1916,8 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
     \item Time spent in each function and its children
     \end{itemize}
   \end{block}
+
+  \vspace*{-1cm}
 
   \begin{lstlisting}[gobble=3, basicstyle=\scriptsize\ttfamily, caption={Call graph example}]
     granularity: each sample hit covers 2 byte(s) for 20.00% of 0.05 seconds
@@ -1965,18 +1969,26 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 \begin{frame}[fragile]{Obtaining a visual output: {\tt Gprof} and {\tt
       gprof2dot}}
 
-  \begin{block}{gprof2dot}
-    Python script to convert output from many profilers into a dot graph
+  \begin{block}{{\tt gprof2dot}}
+    \begin{itemize}
+    \item[$\Rightarrow$] Python script to convert profiler output into a dot graph
+    \end{itemize}
   \end{block}
+
+  \vspace*{-0.8cm}
 
   \begin{lstlisting}[gobble=3]
     gprof program\_binary [gmon.out] | gprof2dot.py \
                                      | dot -Tpng -o output.png
   \end{lstlisting}
 
+  \vspace*{-0.2cm}
+
   \begin{figure}
     \includegraphics{gprof2dot_ex}
   \end{figure}
+
+  \vspace*{-0.3cm}
 
   \begin{columns}
     \column{.45\textwidth}{
@@ -2204,6 +2216,8 @@ Source and Assembly List using GCC: {\scriptsize \url{http://www.systutorials.co
 
 \begin{frame}[fragile]{Valgrind: cachegrind output}
 
+  \vspace*{-0.5cm}
+
   \begin{lstlisting}[style=valgrind,caption={Cachegrind
       output: recap}]
 
@@ -2228,9 +2242,10 @@ LL miss rate:          0.0% (           0.0%   +           0.3% )
 
 \begin{frame}[fragile]{Valgrind: cachegrind output}
 
+  \vspace*{-0.5cm}
+
   \begin{lstlisting}[style=valgrind,xleftmargin=-0.75cm,basicstyle=\tiny\ttfamily,caption={Cachegrind
       output: annotated output}]
-
 % cg_annotate --auto=yes cachegrind.out.30363
 --------------------------------------------------------------------------------
 I1 cache:         32768 B, 64 B, 8-way associative
@@ -2302,7 +2317,9 @@ LL cache:         3145728 B, 64 B, 12-way associative
 
 \begin{frame}[fragile]{Valgrind: Memcheck example}
 
-  \begin{lstlisting}[style=c,gobble=1]
+  \vspace*{-0.8cm}%
+  \begin{lstlisting}[style=c,gobble=1,caption={C code with some memory
+    issues}]
     #include <stdlib.h>
 
     void f(void) {
@@ -2316,7 +2333,7 @@ LL cache:         3145728 B, 64 B, 12-way associative
     }
   \end{lstlisting}
 
-  \vspace*{-0.5cm}%
+  \vspace*{-0.9cm}%
   \hspace{-0.6cm}%
   \begin{overprint}
     \onslide<1>
@@ -2438,6 +2455,7 @@ LL cache:         3145728 B, 64 B, 12-way associative
 
 \begin{frame}[fragile]{Valgrind: massif output}
 
+  \vspace*{-.7cm}%
   \begin{lstlisting}[style=valgrind,xleftmargin=-0.75cm,basicstyle=\scriptsize\ttfamily,] 
    MB
 3.952^                                                                    #
@@ -2690,7 +2708,7 @@ LL cache:         3145728 B, 64 B, 12-way associative
 
 \begin{frame}[fragile]{Extrae: submission script}
 
-  \vspace*{-0.2cm}
+  \vspace*{-0.8cm}
   \begin{lstlisting}[style=shell,gobble=3,caption={submit\_trace.sh}]
     #!/bin/sh
     #SBATCH -t 00:20:00 # execution time hh:mm:ss *OB*
@@ -2707,7 +2725,7 @@ LL cache:         3145728 B, 64 B, 12-way associative
 
   \pause
 
-  \vspace*{-0.2cm}
+  \vspace*{-0.8cm}
   \begin{lstlisting}[style=shell,gobble=3,caption={trace.sh}]
     #!/bin/sh
     source /opt/cesga/easybuild-cesga/software/MPI/gcc/6.4.0\
