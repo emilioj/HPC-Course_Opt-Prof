@@ -992,16 +992,17 @@
 
 \begin{frame}[fragile]{Basic optimization techniques: Conditionals}
 
+  \underline{Simplify logic expressions}:
+  \vspace*{-0.7cm}
   \begin{columns}
 
     \column[t]{0.56\textwidth}{
-      \underline{Simplify logic expressions}:\\[-0.1cm]
       \begin{lstlisting}[style=c,gobble=7,caption={Original code}]
         if (t1 == 0 && t2 == 0 && t3 == 0)
       \end{lstlisting}
     }
 
-    \column[t]{0.4\textwidth}{\vspace*{-0.1cm}
+    \column[t]{0.4\textwidth}{
       \begin{lstlisting}[style=c,gobble=7,caption={Optimized code}]
         if ((t1 | t2 | t3) == 0)
       \end{lstlisting}
@@ -1010,19 +1011,19 @@
   \end{columns}
 
   \pause
-  \vfill
 
+  \underline{Leverage shortcut evaluation}:
+  \vspace*{-0.7cm}
   \begin{columns}
 
     \column[t]{0.45\textwidth}{
-      \underline{Leverage shortcut evaluation}:\\[-0.1cm]
       \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
         if (usually_true()
             && usually_false())
       \end{lstlisting}
     }
 
-    \column[t]{0.45\textwidth}{\vspace*{-0.1cm}
+    \column[t]{0.45\textwidth}{
       \begin{lstlisting}[style=c,gobble=5,caption={Optimized code}]
         if (usually_false()
             && usually_true())
@@ -1032,12 +1033,13 @@
   \end{columns}
 
   \pause
-  \vfill
 
+  \underline{Loop-invariant conditional motion}:
+  \vspace*{-1.1cm}
   \begin{columns}
 
     \column[t]{0.45\textwidth}{
-      \underline{Loop-invariant conditional motion}:\\[-0.1cm]
+
       \begin{lstlisting}[style=c,gobble=5,caption={Original code}]
         for (i=0; i<N; i++)
           if (op == 'a')
